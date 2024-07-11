@@ -1,28 +1,18 @@
 <template>
-  <TresGroup>
-    <primitive
-        :object="scene"
-        cast-shadow
-        receive-shadow
-        :scale="0.01"
-        @click="(intersection, pointerEvent) => console.log('click', intersection, pointerEvent)"
-    ></primitive>
-  </TresGroup>
+  <Natural :features="naturalFeatures" />
+  <Buildings :features="buildingsFeatures" />
 </template>
 
 <script setup lang="ts">
-import { MeshPhongMaterial } from "three";
-const { scene } = await useGLTF("/models/carcassonne-castle.glb");
-const customShaderMaterial = new MeshPhongMaterial();
+  import Buildings from "~/components/Map/Buildings.vue";
+  import Natural from "~/components/Map/Natural.vue";
+  const {data} = await useFetch('/api/osm_data')
 
-scene.traverse((child: any) => {
-  if (child.isMesh && child.material) {
-    child.material = customShaderMaterial;
-    child.castShadow = true;
-    child.receiveShadow = true;
-  }
-});
+  const naturalFeatures = computed(() => {
+    return data.value && data.value.natural ? data.value.natural.features : []
+  })
 
-// TODO: Use raycaster to highlight elements
-
+  const buildingsFeatures = computed(() => {
+    return data.value && data.value.buildings ? data.value.buildings.features : []
+  })
 </script>

@@ -16,6 +16,7 @@
     "@tresjs/leches": "^0.14.0",
     "@tresjs/nuxt": "^2.1.2",
     "@tresjs/post-processing": "^0.7.1",
+    "geolib": "3.3.1",
     "nuxt": "^3.11.2",
     "pinia": "^2.1.7",
     "three": "^0.165.0",

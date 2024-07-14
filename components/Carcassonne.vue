@@ -1,6 +1,6 @@
 <template>
-  <Natural :features="naturalFeatures" />
-  <Buildings :features="buildingsFeatures" />
+  <Natural :features="naturalFeatures"/>
+  <Buildings :features="buildingsFeatures"/>
 </template>
 
 <script setup lang="ts">

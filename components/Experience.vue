@@ -1,16 +1,11 @@
 <template>
-  <TresPerspectiveCamera/>
+  <TresPerspectiveCamera />
   <MapControls />
   <TresAmbientLight :intensity="1" />
   <TresDirectionalLight cast-shadow :position="[0, 100, 10]" :intensity="1" />
   <Suspense>
-    <Carcassonne>
-      <Blasons :points="props.points"/>
-    </Carcassonne>
+    <Carcassonne />
   </Suspense>
 </template>
 
-<script setup lang="ts">
-const { camera } = useTresContext();
-
-</script>
+<script setup lang="ts"></script>

@@ -1,5 +1,4 @@
 <template>
-
   <TresGroup v-if="features">
     <template  v-for="element of features">
       <Shape

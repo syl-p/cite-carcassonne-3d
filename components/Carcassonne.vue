@@ -1,13 +1,13 @@
 <template>
   <TresGroup v-if="data">
     <Natural :features="naturalFeatures" v-if="naturalFeatures" />
-    <Buildings :features="buildingsFeatures" v-if="buildingsFeatures" />
+    <Urban :features="buildingsFeatures" v-if="buildingsFeatures" />
   </TresGroup>
 </template>
 
 <script setup lang="ts">
-import Buildings from "~/components/Map/Buildings.vue";
 import Natural from "~/components/Map/Natural.vue";
+import Urban from "./Map/Urban.vue";
 const { data } = await useFetch("/api/osm_data");
 
 const naturalFeatures = computed(() => {

@@ -19,7 +19,7 @@
       <Stats />
     </TresCanvas>
     <section
-      class="mt-[100vh] sticky top-0 left-0 bg-white p-8 flex flex-col justify-center"
+      class="mt-[100vh] sticky top-0 left-0 bg-white flex flex-col justify-center"
     >
       <NuxtPage />
     </section>

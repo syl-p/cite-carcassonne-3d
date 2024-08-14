@@ -9,8 +9,12 @@ export default {
     "./error.vue",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        accent: "",
+        page: "#fdfcf5",
+      },
+    },
   },
-  plugins: [require('@tailwindcss/typography')],
-}
-
+  plugins: [require("@tailwindcss/typography")],
+};

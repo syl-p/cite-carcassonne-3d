@@ -1,5 +1,5 @@
 <template>
-  <section class="prose">
+  <section class="prose container mx-auto prose-h1:text-5xl">
     <ContentDoc />
     <footer>
       <NuxtLink v-if="prev" :to="prev._path">Précédent</NuxtLink>
@@ -9,5 +9,5 @@
 </template>
 
 <script setup lang="ts">
-  const {prev, next} = useContent()
+const { prev, next } = useContent();
 </script>

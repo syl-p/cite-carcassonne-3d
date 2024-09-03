@@ -1,16 +1,19 @@
 <template>
-  <div class="hidden lg:flex w-full fixed top-1/2 left-0 space-x-5 px-8">
-    <ul class="">
-      <li>
-        <NuxtLink to="/" active-class="underline"> Tout </NuxtLink>
-      </li>
-      <li>Enceintes</li>
-      <li>Intérieur</li>
-    </ul>
+  <div
+    class="z-[100] lg:flex lg:flex-col w-full h-screen fixed top-0 left-0 justify-center px-8 bg-white"
+  >
+    <button @click="$emit('close')" class="uppercase absolute left-8 top-8">
+      Fermer
+    </button>
     <nav class="flex">
-      <ul>
+      <ul class="space-y-4">
         <li v-for="page of pages">
-          <NuxtLink :to="page._path" active-class="underline">
+          <NuxtLink
+            :to="page._path"
+            active-class="underline"
+            @click="$emit('close')"
+            class="text-4xl uppercase"
+          >
             {{ page.title }}
           </NuxtLink>
         </li>

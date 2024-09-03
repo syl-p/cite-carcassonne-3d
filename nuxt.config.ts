@@ -1,8 +1,8 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: true },
-  modules: ["@tresjs/nuxt", "@nuxt/content", "@pinia/nuxt"],
-  css: ['~/assets/css/main.css'],
+  modules: ["@tresjs/nuxt", "@nuxt/content", "@pinia/nuxt", "@vueuse/nuxt"],
+  css: ["~/assets/css/main.css"],
   postcss: {
     plugins: {
       tailwindcss: {},
@@ -10,6 +10,6 @@ export default defineNuxtConfig({
     },
   },
   content: {
-    documentDriven: true
-  }
+    documentDriven: true,
+  },
 });

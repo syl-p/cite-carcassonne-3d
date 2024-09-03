@@ -2,7 +2,7 @@
 title: Le Château Comtal
 filter: Interieur
 position:
-  - 6
+  - 1
   - 0.5
   - 3
 offset:

@@ -1,20 +1,29 @@
 <template>
-  <main class="font-serif">
-    <UiNavigation :pages="data" />
+  <main class="relative h-fit font-serif">
+    <header class="p-8 fixed flex justify-between top-0 left-0 w-full z-50">
+      <div><NuxtLink to="/">Logo</NuxtLink></div>
+      <button class="uppercase text-2xl" @click="navOpened = !navOpened">
+        Menu
+      </button>
+    </header>
+    <UiNavigation
+      :pages="data"
+      v-show="navOpened"
+      @close="() => (navOpened = false)"
+    />
     <TresCanvas
       v-bind="gl"
       window-size
       clear-color="#FFF0D6"
       shadows
-      class="-z-10"
+      class="fixed top-0 left-0 -z-50 w-full h-screen"
     >
       <Experience :points="data as Array<any>" />
     </TresCanvas>
-    <section
-      class="bg-page mt-[100vh] sticky top-0 left-0 bg-white flex flex-col justify-center pt-10"
-    >
-      <NuxtPage />
-    </section>
+
+    <NuxtPage />
+
+    <UiFooter />
   </main>
 </template>
 
@@ -23,13 +32,14 @@ import { BasicShadowMap, NoToneMapping, SRGBColorSpace } from "three";
 const { data } = await useAsyncData("parts", () =>
   queryContent("parts").find()
 );
+const { page } = useContent();
+const navOpened = ref(false);
 
 const gl = {
   clearColor: "#FFF0D6",
   shadows: true,
-  alpha: false,
   shadowMap: {
-    autoUpdate: false,
+    autoUpdate: true,
   },
   shadowMapType: BasicShadowMap,
   outputColorSpace: SRGBColorSpace,

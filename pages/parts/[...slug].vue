@@ -11,7 +11,7 @@
       >
         <div class="flex-1 flex flex-col justify-center items-center">
           <p>Les ramparts</p>
-          <h1 class="text-4xl lg:text-7xl">{{ page.title }}</h1>
+          <h1 class="font-spectral text-4xl lg:text-7xl">{{ page.title }}</h1>
           <p>{{ scrollOverHeaderPourcent }}</p>
         </div>
         <div class="pb-28">
@@ -33,10 +33,12 @@
         </div>
       </div>
     </header>
-    <article class="prose container mx-auto my-24 prose-h1:text-7xl z-10">
+    <article
+      class="prose container mx-auto my-24 prose-h1:font-spectral prose-h2:font-spectral prose-h1:text-7xl prose-h2:text-4xl z-10"
+    >
       <ContentDoc />
 
-      <footer>
+      <footer class="w-full flex justify-between">
         <NuxtLink v-if="prev" :to="prev._path">Précédent</NuxtLink>
         <NuxtLink v-if="next" :to="next._path">Suivant</NuxtLink>
       </footer>
@@ -47,13 +49,13 @@
 <script setup lang="ts">
 const { prev, next, page } = useContent();
 import { useWindowScroll } from "@vueuse/core";
-const { x, y } = useWindowScroll();
+const { y } = useWindowScroll();
 const headerRef: Ref<HTMLElement | null> = ref(null);
 const scrollOverHeaderPourcent = ref(0);
 
-watch([x, y], (newValue) => {
+watch(y, (newValue) => {
   if (headerRef.value) {
-    const value = (newValue[1] / headerRef.value.scrollHeight) * 100;
+    const value = (newValue / headerRef.value.scrollHeight) * 100;
     const pourcent = Math.min(Math.max(value, 0), 100);
     scrollOverHeaderPourcent.value = Math.round(pourcent);
   }

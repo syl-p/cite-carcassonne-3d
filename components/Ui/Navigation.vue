@@ -1,18 +1,14 @@
 <template>
   <div
-    class="z-[100] lg:flex lg:flex-col w-full h-screen fixed top-0 left-0 justify-center px-8 bg-white"
+    class="z-[100] flex flex-col w-full h-screen fixed top-0 left-0 justify-center px-8"
   >
-    <button @click="$emit('close')" class="uppercase absolute left-8 top-8">
-      Fermer
-    </button>
     <nav class="flex">
       <ul class="space-y-4">
         <li v-for="page of pages">
           <NuxtLink
             :to="page._path"
-            active-class="underline"
             @click="$emit('close')"
-            class="text-4xl uppercase"
+            class="text-xl uppercase"
           >
             {{ page.title }}
           </NuxtLink>

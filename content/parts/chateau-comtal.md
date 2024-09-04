@@ -11,9 +11,7 @@ offset:
   - 1
 ---
 
-# Le Château Comtal de la Cité de Carcassonne : Joyau Médiéval Éternel
-
-## Introduction
+# Le Château Comtal
 
 Aux confins du temps et de l'espace, où le passé résonne avec une majesté inébranlable, se dresse le Château Comtal de la Cité de Carcassonne. Ce monument emblématique, incarnation de l'histoire et de la splendeur médiévales, offre une plongée captivante dans un monde où chevaliers, seigneurs et bâtisseurs ont laissé une empreinte indélébile.
 

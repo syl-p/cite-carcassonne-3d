@@ -3,14 +3,13 @@
     <TresCanvas
       v-bind="gl"
       window-size
-      clear-color="gray"
       shadows
       class="fixed top-0 left-0 -z-50 w-full h-screen"
     >
       <Experience />
     </TresCanvas>
 
-    <header class="p-8 fixed flex justify-between top-0 left-0 w-full z-50">
+    <header class="z-50 p-8 fixed flex justify-between top-0 left-0 w-full z-50">
       <div>
         <NuxtLink to="/" class="flex space-x-3">
           <div class="w-10 h-10 bg-white"></div>
@@ -45,7 +44,7 @@ const { data } = await useAsyncData("parts", () =>
 const { page } = useContent();
 
 const gl = {
-  clearColor: "#FFF0D6",
+  clearColor: "#000000",
   shadows: true,
   shadowMap: {
     autoUpdate: false,

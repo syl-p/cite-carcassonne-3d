@@ -14,5 +14,6 @@
 import * as THREE from "three";
 const { camera } = useTresContext();
 const initialOffset = new THREE.Vector3(1, 3, 4);
+const {page} = useContent()
 usePageLocalisation(initialOffset, camera);
 </script>

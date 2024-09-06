@@ -1,11 +1,8 @@
 <template>
   <primitive
     :object="scene"
-    cast-shadow
-    receive-shadow
     :scale="0.01"
   ></primitive>
-  <BakeShadows />
 </template>
 
 <script setup lang="ts">
@@ -24,8 +21,6 @@ scene.traverse((child: any) => {
     child.material =
       child.name == "Terrain" ? terrainMaterial : buildingMaterial;
   }
-  child.castShadow = true;
-  child.receiveShadow = true;
 });
 
 async function handleClick() {

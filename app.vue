@@ -49,6 +49,7 @@ const gl = {
   shadowMap: {
     autoUpdate: false,
   },
+  disableRender: true,
   shadowMapType: BasicShadowMap,
   outputColorSpace: LinearSRGBColorSpace,
   toneMapping: NoToneMapping,

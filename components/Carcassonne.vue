@@ -10,6 +10,8 @@ import * as THREE from "three";
 const { scene } = await useGLTF(
   "/models/cite-carcassonne-export/cite-carcassonne.gltf"
 );
+const emit = defineEmits(['select'])
+const {camera} = useTresContext()
 const buildingMaterial = new THREE.MeshPhongMaterial();
 const terrainMaterial = new THREE.MeshPhongMaterial({
   color: "gray",
@@ -23,11 +25,19 @@ scene.traverse((child: any) => {
   }
 });
 
-async function handleClick() {
-  console.log("test click");
-}
+const raycaster = new THREE.Raycaster();
+const pointer = new THREE.Vector2();
 
-async function onClick(pointData: { _path: any }) {
-  await navigateTo({ path: pointData._path });
-}
+window.addEventListener('click', (event) => {
+  if (!camera.value)
+  return
+
+	pointer.x = ( event.clientX / window.innerWidth ) * 2 - 1;
+	pointer.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+  raycaster.setFromCamera(pointer, camera.value)
+
+  const intersects = raycaster.intersectObjects( scene.children );
+  emit('select', intersects.map(o => o.object))
+})
+
 </script>

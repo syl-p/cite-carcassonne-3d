@@ -9,7 +9,9 @@
       <Experience />
     </TresCanvas>
 
-    <header class="z-50 p-8 fixed flex justify-between top-0 left-0 w-full z-50">
+    <header
+      class="z-50 p-8 fixed flex justify-between top-0 left-0 w-full z-50"
+    >
       <div>
         <NuxtLink to="/" class="flex space-x-3">
           <div class="w-10 h-10 bg-white"></div>
@@ -45,7 +47,7 @@ const { page } = useContent();
 
 const gl = {
   clearColor: "#000000",
-  shadows: true,
+  shadows: false,
   shadowMap: {
     autoUpdate: false,
   },

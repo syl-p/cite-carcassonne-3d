@@ -1,10 +1,12 @@
 import * as THREE from "three";
-import { computed } from "vue";
+import { computed, type ShallowRef } from "vue";
 
 export default (
   initialOffset: THREE.Vector3,
-  camera: globalThis.ComputedRef<THREE.Camera | undefined>
+  camera: globalThis.ComputedRef<THREE.Camera | undefined>,
+  scene: ShallowRef<THREE.Scene | undefined>
 ) => {
+  const default_position = new THREE.Vector3();
   const currentPosition = new THREE.Vector3();
   const currentLookAt = new THREE.Vector3();
   const { page } = useContent();
@@ -19,13 +21,17 @@ export default (
   }
 
   const currentPart = computed(() => {
-    return page.value && page.value.position
-      ? new THREE.Vector3(
-          page.value.position[0],
-          page.value.position[1],
-          page.value.position[2]
-        )
-      : new THREE.Vector3();
+    let objectsTarget = new THREE.Vector3();
+    if (!scene.value || !page.value) return default_position;
+
+    scene.value.traverse((obj) => {
+      if (obj.name === page.value.object_name) {
+        console.log(obj.name, obj.position);
+        obj.getWorldPosition(objectsTarget);
+      }
+    });
+
+    return objectsTarget ? objectsTarget : default_position;
   });
 
   const currentPartOffset = computed(() => {

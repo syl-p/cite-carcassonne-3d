@@ -1,10 +1,7 @@
 ---
 title: Le théatre
 filter: Interieur
-position:
-  - 3
-  - 0.5
-  - 2
+object_name: Object_7
 offset:
   - 1
   - 0.5

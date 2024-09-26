@@ -1,10 +1,7 @@
 ---
 title: Eglise Saint Nazaire
 filter: Interieur
-position:
-  - 3
-  - 0.5
-  - 2
+object_name: Basilique_Saint-Nazaire
 offset:
   - 1
   - 0.5

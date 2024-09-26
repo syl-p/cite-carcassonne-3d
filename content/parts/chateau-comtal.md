@@ -1,10 +1,7 @@
 ---
 title: Le Château Comtal
 filter: Interieur
-position:
-  - 1
-  - 0.5
-  - 3
+uuid: ce0eec66-e8fa-4257-aca2-013735ed2856
 offset:
   - 0
   - 1

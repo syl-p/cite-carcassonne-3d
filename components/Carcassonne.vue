@@ -5,7 +5,7 @@
 <script setup lang="ts">
 import * as THREE from "three";
 const { scene } = await useGLTF(
-  "/models/cite-carcassonne-export/cite-carcassonne.gltf"
+  "/models/cite-carcassonne-export/cite-carcassonne.gltf",
 );
 const emit = defineEmits(["select"]);
 const { camera } = useTresContext();
@@ -13,6 +13,8 @@ const buildingMaterial = new THREE.MeshPhongMaterial();
 const terrainMaterial = new THREE.MeshPhongMaterial({
   color: "gray",
   depthWrite: false,
+  transparent: true,
+  opacity: 0.4,
 });
 
 scene.traverse((child: any) => {
@@ -35,7 +37,7 @@ window.addEventListener("click", (event) => {
   const intersects = raycaster.intersectObjects(scene.children);
   emit(
     "select",
-    intersects.map((o) => o.object)
+    intersects.map((o) => o.object),
   );
 });
 </script>

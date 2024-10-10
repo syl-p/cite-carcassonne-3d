@@ -22,13 +22,12 @@ usePageLocalisation(initialOffset, camera, scene);
 const outlinedObjects = ref<THREE.Object3D[]>([]);
 
 const outlineParameters = reactive({
-  pulseSpeed: 0.1,
-  edgeStrength: 2.5,
-  visibleEdgeColor: "#ff0000",
+  // pulseSpeed: 0.1,
+  edgeStrength: 3.0,
+  visibleEdgeColor: "#ff0045",
 });
 
 const changeOutline = (objects: Array<THREE.Object3D>) => {
   outlinedObjects.value = [...objects];
-  console.log(objects, outlinedObjects);
 };
 </script>

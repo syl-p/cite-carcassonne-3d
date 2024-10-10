@@ -1,5 +1,6 @@
 ---
 title: Eglise Saint Nazaire
+description: "Au seuil de la légendaire Cité de Carcassonne, une entrée majestueuse se dresse, défiant les siècles et les envahisseurs : la Porte Narbonnaise. Symbole de la puissance et de la grandeur médiévales, cette porte monumentale accueille les visiteurs, les plongeant instantanément dans un passé où les remparts et les chevaliers régnaient en maîtres. Découvrez la fascinante histoire et l'architecture impressionnante de cette porte emblématique."
 filter: Interieur
 object_name: Basilique_Saint-Nazaire
 offset:
@@ -7,10 +8,6 @@ offset:
   - 0.5
   - 1
 ---
-
-# La Porte Narbonnaise
-
-Au seuil de la légendaire Cité de Carcassonne, une entrée majestueuse se dresse, défiant les siècles et les envahisseurs : la Porte Narbonnaise. Symbole de la puissance et de la grandeur médiévales, cette porte monumentale accueille les visiteurs, les plongeant instantanément dans un passé où les remparts et les chevaliers régnaient en maîtres. Découvrez la fascinante histoire et l'architecture impressionnante de cette porte emblématique.
 
 ## Une Histoire Remarquable
 

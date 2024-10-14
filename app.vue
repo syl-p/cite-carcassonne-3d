@@ -1,7 +1,7 @@
 <template>
-  <main class="relative w-full items-stretch bg-primary">
+  <main class="relative w-full items-stretch bg-primary text-lg">
     <aside
-      class="fixed left-0 top-0 z-50 hidden h-screen w-56 shrink-0 border-r border-gray-300 bg-primary py-8 lg:block"
+      class="fixed left-8 top-0 z-50 w-56 shrink-0 py-8 lg:left-0 lg:top-0 lg:block lg:h-screen lg:border-r lg:border-gray-300 lg:bg-primary"
     >
       <div
         class="h-full lg:flex lg:flex-col lg:items-center lg:justify-between"
@@ -44,7 +44,7 @@
           </svg>
         </button>
 
-        <div class="w-full text-center">
+        <div class="hidden w-full text-center lg:block">
           <div class="mx-auto h-20 w-20 bg-slate-700 p-10"></div>
           <p class="my-5 font-spectral uppercase">La cité en 3D</p>
           <div class="mx-auto my-5 h-1 w-12 bg-yellow-500"></div>

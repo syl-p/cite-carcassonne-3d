@@ -19,6 +19,13 @@ export default {
         accent: "",
         page: "#fdfcf5",
       },
+      typography: (theme) => ({
+        DEFAULT: {
+          css: {
+            maxWidth: "100%",
+          },
+        },
+      }),
     },
   },
   plugins: [require("@tailwindcss/typography")],

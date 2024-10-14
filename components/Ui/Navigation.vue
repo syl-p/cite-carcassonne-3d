@@ -1,14 +1,21 @@
 <template>
   <div class="z-50 h-screen w-full p-4">
+    <div class="mb-3 mb-6 border-b border-gray-300 pb-6">
+      <h3 class="text-3xl">Liste des parties de la cités</h3>
+    </div>
     <nav>
       <ul class="space-y-4">
         <li v-for="(page, index) of pages">
           <NuxtLink
             :to="page._path"
             @click="$emit('close')"
-            class="text-xl uppercase opacity-[0.5] transition-all hover:text-3xl hover:opacity-[1]"
+            class="group flex items-center space-x-3 align-middle"
           >
-            {{ index }}. {{ page.title }}
+            <span
+              class="flex h-10 w-10 flex-col items-center justify-center rounded-full border border-yellow-500 bg-white transition duration-500 ease-in-out group-hover:bg-yellow-500"
+              >{{ index }}</span
+            >
+            <span class="block group-hover:underline">{{ page.title }}</span>
           </NuxtLink>
         </li>
       </ul>

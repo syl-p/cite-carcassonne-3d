@@ -1,7 +1,7 @@
 ---
 title: La Porte Saint-Nazaire
 filter: Enceintes
-uuid: ce0eec66-e8fa-4257-aca2-013735ed2856
+object_name: porte_zt_nazaire
 offset:
   - 1
   - 0.5

@@ -6,7 +6,6 @@ export default (
   camera: globalThis.ComputedRef<THREE.Camera | undefined>,
   scene: ShallowRef<THREE.Scene | undefined>
 ) => {
-  const default_position = new THREE.Vector3();
   const currentPosition = new THREE.Vector3();
   const currentLookAt = new THREE.Vector3();
   const { page } = useContent();
@@ -21,17 +20,17 @@ export default (
   }
 
   const currentPart = computed(() => {
-    let objectsTarget = new THREE.Vector3();
-    if (!scene.value || !page.value) return default_position;
+    let targetedPosition = new THREE.Vector3();
+    if (!scene.value || !page.value) return targetedPosition;
 
     scene.value.traverse((obj) => {
       if (obj.name === page.value.object_name) {
         console.log(obj.name, obj.position);
-        obj.getWorldPosition(objectsTarget);
+        obj.getWorldPosition(targetedPosition);
       }
     });
 
-    return objectsTarget ? objectsTarget : default_position;
+    return targetedPosition;
   });
 
   const currentPartOffset = computed(() => {

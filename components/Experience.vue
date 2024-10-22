@@ -4,6 +4,13 @@
   <TresDirectionalLight cast-shadow :position="[-2, 10, 4]" :intensity="1.5" />
   <Suspense>
     <Carcassonne @select="changeOutline" />
+    <template #fallback>
+      <Html center fullscreen>
+        <div  class="h-full w-full bg-primary flex flex-col justify-center items-center">
+          <p>Chargement de la carte...</p>
+        </div>
+      </Html>
+    </template>
   </Suspense>
   <EffectComposer>
     <Outline
@@ -14,6 +21,7 @@
 </template>
 
 <script setup lang="ts">
+import { Html } from '@tresjs/cientos'
 import * as THREE from "three";
 const { camera, scene } = useTresContext();
 const initialOffset = new THREE.Vector3(1, 3, 4);
@@ -30,4 +38,5 @@ const outlineParameters = reactive({
 const changeOutline = (objects: Array<THREE.Object3D>) => {
   outlinedObjects.value = [...objects];
 };
+
 </script>

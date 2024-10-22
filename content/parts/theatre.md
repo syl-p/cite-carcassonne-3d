@@ -1,7 +1,7 @@
 ---
 title: Le théatre
 filter: Interieur
-object_name: Object_7
+object_name: Theatre
 offset:
   - 1
   - 0.5

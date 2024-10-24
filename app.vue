@@ -1,6 +1,6 @@
 <template>
   <main class="relative w-full items-stretch bg-primary text-lg">
-    <section class="relative min-h-screen p-6 lg:ml-56">
+    <section class="relative min-h-screen lg:p-6 lg:ml-56">
       <UiSidebar>
         <template #menuButton>
           <button
@@ -52,7 +52,7 @@
       <UiNavigation :pages="data" v-if="showMenu" @close="showMenu = false" />
       <header
         class="w-full relative"
-        :class="page.title ? 'h-[60vh]' : 'h-[calc(100vh-theme(space.12))]'"
+        :class="page.title ? 'h-[60vh]' : ' h-[100vh] lg:h-[calc(100vh-theme(space.12))]'"
       >
         <TresCanvas v-bind="gl" shadows class="transition-all duration-200 relative">
           <Experience />
@@ -64,7 +64,7 @@
 </template>
 
 <script setup lang="ts">
-import { BasicShadowMap, LinearSRGBColorSpace } from "three";
+import { BasicShadowMap, LinearSRGBColorSpace, PCFSoftShadowMap } from "three";
 const showMenu = ref<boolean>(false);
 const { data } = await useAsyncData("parts", () =>
   queryContent("parts").find(),
@@ -79,7 +79,7 @@ const gl = {
     autoUpdate: false,
   },
   disableRender: true,
-  shadowMapType: BasicShadowMap,
+  shadowMapType: PCFSoftShadowMap,
   outputColorSpace: LinearSRGBColorSpace,
 };
 </script>

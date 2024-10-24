@@ -1,5 +1,5 @@
 <template>
-  <article class="pt-12">
+  <article class="pt-10 px-6 lg:px-0">
     <header
       class="relative mb-10 w-full transition-all lg:grid lg:grid-cols-8 lg:gap-8"
       ref="headerRef"

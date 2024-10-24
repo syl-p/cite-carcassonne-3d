@@ -1,7 +1,7 @@
 <template>
   <TresPerspectiveCamera />
-  <TresAmbientLight :intensity="1" />
-  <TresDirectionalLight cast-shadow :position="[-2, 10, 4]" :intensity="1.5" />
+  <TresAmbientLight :intensity="1.5" />
+  <TresDirectionalLight cast-shadow :position="[-4, 8, 6]" :intensity="1.5" />
   <Suspense>
     <Carcassonne @select="changeOutline" />
     <template #fallback>

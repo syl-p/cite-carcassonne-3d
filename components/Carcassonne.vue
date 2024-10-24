@@ -1,6 +1,7 @@
 <template>
   <primitive :object="scene" :scale="0.01"></primitive>
   <Spot v-if="scene"/>
+  <LazyBakeShadows />
 </template>
 
 <script setup lang="ts">

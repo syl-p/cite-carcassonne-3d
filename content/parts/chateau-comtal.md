@@ -3,9 +3,9 @@ title: Le Château Comtal
 filter: Interieur
 object_name: chateau_comtal
 offset:
-  - 0
-  - 1
-  - 1
+  - 0.5
+  - 0.6
+  - -0.5
 ---
 
 # Le Château Comtal

@@ -1,14 +1,15 @@
 <template>
-  <article class="pt-10 px-6 lg:px-0">
+  <article class="px-6 pt-10 lg:px-0">
     <header
       class="relative mb-10 w-full transition-all lg:grid lg:grid-cols-8 lg:gap-8"
       ref="headerRef"
     >
       <div class="flex-1 lg:col-span-6">
-        <UiPreviousNext />
-        <h1 class="mb-3 font-spectral text-5xl lg:text-8xl">
+        <NuxtLink to="/" class="">Afficher tout</NuxtLink>
+        <h1 class="my-3 border-b-4 border-b-black font-spectral text-7xl">
           {{ page.title }}
         </h1>
+        <UiPreviousNext />
         <p>{{ page.description }}</p>
       </div>
       <div class="hidden lg:col-span-2 lg:block">
@@ -32,5 +33,5 @@
 </template>
 
 <script setup lang="ts">
-const { prev, next, page, toc } = useContent();
+const { page, toc } = useContent();
 </script>

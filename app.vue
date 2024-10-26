@@ -1,6 +1,6 @@
 <template>
   <main class="relative w-full items-stretch bg-primary text-lg">
-    <section class="relative min-h-screen lg:p-6 lg:ml-56">
+    <section class="relative min-h-screen lg:ml-56 lg:p-6">
       <UiSidebar>
         <template #menuButton>
           <button
@@ -51,10 +51,18 @@
       </UiSidebar>
       <UiNavigation :pages="data" v-if="showMenu" @close="showMenu = false" />
       <header
-        class="w-full relative"
-        :class="page.title ? 'h-[60vh]' : ' h-[100vh] lg:h-[calc(100vh-theme(space.12))]'"
+        class="relative w-full overflow-hidden"
+        :class="
+          page.title
+            ? 'h-[60vh]'
+            : 'h-[100vh] lg:h-[calc(100vh-theme(space.12))]'
+        "
       >
-        <TresCanvas v-bind="gl" shadows class="transition-all duration-200 relative">
+        <TresCanvas
+          v-bind="gl"
+          shadows
+          class="relative transition-all duration-200"
+        >
           <Experience />
         </TresCanvas>
       </header>

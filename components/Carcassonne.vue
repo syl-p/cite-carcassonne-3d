@@ -1,6 +1,6 @@
 <template>
   <primitive :object="scene" :scale="0.01"></primitive>
-  <Spot v-if="scene"/>
+  <Spot v-if="scene" />
   <LazyBakeShadows />
 </template>
 
@@ -15,7 +15,7 @@ const emit = defineEmits(["select"]);
 const { camera } = useTresContext();
 
 // Apply alpha texture on material
-["material_0", "wall"].forEach(name => {
+["material_0", "wall"].forEach((name) => {
   materials[name].onBeforeCompile = (shader) => {
     shader.uniforms.alphaTexture = {
       value: alphaMap,
@@ -49,10 +49,10 @@ const { camera } = useTresContext();
           gl_FragColor.a *= alpha;
 
           #include <dithering_fragment>
-        `
+        `,
     );
   };
-})
+});
 
 scene.traverse((child: THREE.Object3D) => {
   if (child.isMesh && child.material) {
@@ -63,7 +63,7 @@ scene.traverse((child: THREE.Object3D) => {
   }
 });
 
-const raycaster = new THREE.Raycaster();
+/*const raycaster = new THREE.Raycaster();
 const pointer = new THREE.Vector2();
 
 window.addEventListener("click", (event) => {
@@ -78,5 +78,5 @@ window.addEventListener("click", (event) => {
     "select",
     intersects.map((o) => o.object),
   );
-});
+});*/
 </script>

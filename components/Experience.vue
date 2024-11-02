@@ -1,5 +1,5 @@
 <template>
-  <TresPerspectiveCamera />
+  <TresPerspectiveCamera :args="[70, 1, 0.1, 1000]" />
   <TresAmbientLight :intensity="1.5" />
   <TresDirectionalLight cast-shadow :position="[-4, 8, 6]" :intensity="1.5" />
   <Suspense
@@ -29,11 +29,12 @@
 </template>
 
 <script setup lang="ts">
+const emit = defineEmits(["isMoving"]);
 import { Html } from "@tresjs/cientos";
 import * as THREE from "three";
-const { camera, scene } = useTresContext();
+const { scene } = useTresContext();
 const { page } = useContent();
-const initialOffset = new THREE.Vector3(1, 3, 4);
+const initialOffset = new THREE.Vector3(1, 2, 3);
 const outlinedObjects = ref<THREE.Object3D[]>([]);
 const loaded = ref<Boolean>(false);
 
@@ -43,7 +44,7 @@ const outlineParameters = reactive({
   visibleEdgeColor: "#ff0045",
 });
 
-usePageLocalisation(initialOffset, camera, scene, loaded);
+const { isMoving } = usePageLocalisation(initialOffset, loaded);
 
 const changeOutline = (objects: Array<THREE.Object3D>) => {
   outlinedObjects.value = [...objects];
@@ -67,4 +68,8 @@ watch(
     deep: true,
   },
 );
+
+watch(isMoving, (value) => {
+  emit("isMoving", value);
+});
 </script>

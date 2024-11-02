@@ -1,6 +1,6 @@
 <template>
   <main class="relative w-full items-stretch bg-primary text-lg">
-    <section class="relative min-h-screen lg:ml-56 lg:p-6">
+    <section class="relative min-h-screen lg:ml-40 lg:p-6">
       <UiSidebar>
         <template #menuButton>
           <button
@@ -51,19 +51,21 @@
       </UiSidebar>
       <UiNavigation :pages="data" v-if="showMenu" @close="showMenu = false" />
       <header
-        class="relative w-full overflow-hidden"
-        :class="
-          page.title
-            ? 'h-[60vh]'
-            : 'h-[100vh] lg:h-[calc(100vh-theme(space.12))]'
-        "
+        class="duration-400 relative w-full overflow-hidden transition-[height] ease-in-out"
+        :class="heightClasses"
       >
         <TresCanvas
           v-bind="gl"
           shadows
-          class="relative transition-all duration-200"
+          class="duration-400 relative h-full w-full transition-[height] ease-in-out"
         >
-          <Experience />
+          <Experience
+            @is-moving="
+              (value) => {
+                isMoving = value;
+              }
+            "
+          />
         </TresCanvas>
       </header>
       <NuxtPage />
@@ -72,11 +74,17 @@
 </template>
 
 <script setup lang="ts">
-import { BasicShadowMap, LinearSRGBColorSpace, PCFSoftShadowMap } from "three";
+import { LinearSRGBColorSpace, PCFSoftShadowMap } from "three";
 const showMenu = ref<boolean>(false);
 const { data } = await useAsyncData("parts", () =>
   queryContent("parts").find(),
 );
+const isMoving = ref(false);
+const heightClasses = computed(() => {
+  return page.value.title && !isMoving.value
+    ? "h-[60vh]"
+    : "h-[calc(100vh-theme(space.12))]";
+});
 
 const { page } = useContent();
 

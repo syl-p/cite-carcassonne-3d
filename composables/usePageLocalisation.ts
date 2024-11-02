@@ -1,15 +1,12 @@
 import * as THREE from "three";
 import { computed, type ShallowRef } from "vue";
 
-export default (
-  initialOffset: THREE.Vector3,
-  camera: globalThis.ComputedRef<THREE.Camera | undefined>,
-  scene: ShallowRef<THREE.Scene | undefined>,
-  enabled: ShallowRef<Boolean>,
-) => {
-  const currentPosition = new THREE.Vector3();
-  const currentLookAt = new THREE.Vector3();
+export default (initialOffset: THREE.Vector3, enabled: ShallowRef<Boolean>) => {
+  const currentPosition = ref(new THREE.Vector3());
+  const currentLookAt = ref(new THREE.Vector3());
+  const { camera, scene } = useTresContext();
   const { page } = useContent();
+  const isMoving = ref(false);
 
   function calculateOffset(
     targetPosition: THREE.Vector3,
@@ -52,11 +49,30 @@ export default (
         currentPartOffset.value,
       );
 
-      currentPosition.lerp(idealOffset, delta);
-      currentLookAt.lerp(currentPart.value, delta);
+      currentPosition.value.lerp(idealOffset, delta);
+      currentLookAt.value.lerp(currentPart.value, delta);
 
-      camera.value.position.copy(currentPosition);
-      camera.value.lookAt(currentLookAt);
+      camera.value.position.copy(currentPosition.value);
+      camera.value.lookAt(currentLookAt.value);
+
+      const positionReached =
+        currentPosition.value.distanceTo(idealOffset) < 0.01;
+      const lookAtReached =
+        currentLookAt.value.distanceTo(currentPart.value) < 0.01;
+
+      if (positionReached && lookAtReached) {
+        if (isMoving.value) {
+          console.log("Mouvement terminé");
+        }
+        isMoving.value = false;
+      } else {
+        if (!isMoving.value) {
+          console.log("Déplacement en cours");
+        }
+        isMoving.value = true;
+      }
     }
   });
+
+  return { isMoving };
 };

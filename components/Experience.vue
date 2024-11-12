@@ -13,7 +13,7 @@
     <template #fallback>
       <Html center fullscreen>
         <div
-          class="flex h-full w-full flex-col items-center justify-center bg-primary"
+          class="flex h-full w-full flex-col items-center justify-center bg-white"
         >
           <p>Chargement de la carte...</p>
         </div>
@@ -44,7 +44,7 @@ const outlineParameters = reactive({
   visibleEdgeColor: "#ff0045",
 });
 
-const { isMoving } = usePageLocalisation(initialOffset, loaded);
+const { cameraState } = usePageLocalisation(initialOffset, loaded);
 
 const changeOutline = (objects: Array<THREE.Object3D>) => {
   outlinedObjects.value = [...objects];
@@ -69,7 +69,11 @@ watch(
   },
 );
 
-watch(isMoving, (value) => {
-  emit("isMoving", value);
+watch([cameraState, page], (value, old) => {
+  emit("isMoving", value[0]);
+  // NO RESIZE ON PREV/NEXT PAGE
+  // if ((old[1].title && !value[1].title) || (value[1].title && !old[1].title)) {
+  //   emit("isMoving", value[0]);
+  // }
 });
 </script>

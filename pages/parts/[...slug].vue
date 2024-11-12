@@ -1,37 +1,33 @@
 <template>
-  <article class="px-6 pt-10 lg:px-0">
-    <header
-      class="relative mb-10 w-full transition-all lg:grid lg:grid-cols-8 lg:gap-8"
-      ref="headerRef"
-    >
-      <div class="flex-1 lg:col-span-6">
-        <NuxtLink to="/" class="">Afficher tout</NuxtLink>
-        <h1 class="my-3 border-b-4 border-b-black font-spectral text-7xl">
+  <Transition name="fade">
+    <article>
+      <header class="relative w-full transition-all">
+        <h1 class="my-3 border-b-black font-spectral text-6xl">
           {{ page.title }}
         </h1>
         <UiPreviousNext />
-        <p>{{ page.description }}</p>
-      </div>
-      <div class="hidden lg:col-span-2 lg:block">
-        <h3 class="mb-3 text-2xl font-bold uppercase underline">Navigation</h3>
-        <ul v-if="toc && toc.links">
-          <li v-for="link in toc.links" :key="link.text">
-            <a :href="`#${link.id}`" class="font-bold hover:underline">
-              {{ link.text }}
-            </a>
-          </li>
-        </ul>
-      </div>
-    </header>
+      </header>
 
-    <section
-      class="prose prose-lg prose-h1:font-spectral prose-h1:text-7xl prose-h2:font-spectral prose-h2:text-4xl"
-    >
-      <ContentDoc />
-    </section>
-  </article>
+      <section
+        class="prose prose-lg prose-h1:font-spectral prose-h1:text-7xl prose-h2:font-spectral prose-h2:text-4xl prose-p:text-black"
+      >
+        <ContentDoc />
+      </section>
+    </article>
+  </Transition>
 </template>
 
 <script setup lang="ts">
 const { page, toc } = useContent();
 </script>
+
+<style>
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
+}
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
+</style>

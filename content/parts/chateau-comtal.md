@@ -1,13 +1,14 @@
 ---
 title: Le Château Comtal
 filter: Interieur
-description: "Aux confins du temps et de l'espace, où le passé résonne avec une majesté inébranlable, se dresse le Château Comtal de la Cité de Carcassonne. Ce monument emblématique, incarnation de l'histoire et de la splendeur médiévales, offre une plongée captivante dans un monde où chevaliers, seigneurs et bâtisseurs ont laissé une empreinte indélébile."
 object_name: chateau_comtal
 offset:
   - 0.9
   - 0.8
   - 0.5
 ---
+
+Aux confins du temps et de l'espace, où le passé résonne avec une majesté inébranlable, se dresse le Château Comtal de la Cité de Carcassonne. Ce monument emblématique, incarnation de l'histoire et de la splendeur médiévales, offre une plongée captivante dans un monde où chevaliers, seigneurs et bâtisseurs ont laissé une empreinte indélébile.
 
 ## Un Héritage Millénaire
 

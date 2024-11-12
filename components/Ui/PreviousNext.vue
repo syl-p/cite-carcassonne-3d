@@ -1,5 +1,5 @@
 <template>
-  <div class="mb-3 flex w-full justify-between space-x-3 text-sm">
+  <div class="mb-5 flex w-full justify-between space-x-3 text-sm">
     <NuxtLink
       v-if="prev"
       :to="prev._path"

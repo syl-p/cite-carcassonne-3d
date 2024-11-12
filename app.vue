@@ -1,101 +1,62 @@
 <template>
-  <main class="relative w-full items-stretch bg-primary text-lg">
-    <section class="relative min-h-screen lg:ml-40 lg:p-6">
-      <UiSidebar>
-        <template #menuButton>
-          <button
-            @click="showMenu = !showMenu"
-            :class="showMenu ? 'bg-slate-700' : 'bg-yellow-500'"
-            class="flex h-20 w-20 flex-col items-center justify-center rounded-full p-2 text-white transition-all duration-500 ease-in-out hover:h-24 hover:w-24"
-          >
-            <svg
-              v-if="!showMenu"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="1.5"
-              stroke="currentColor"
-              class="h-6 w-6"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0ZM3.75 12h.007v.008H3.75V12Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm-.375 5.25h.007v.008H3.75v-.008Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"
-              />
-            </svg>
-
-            <svg
-              v-else
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="1.5"
-              stroke="currentColor"
-              class="h-6 w-6"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M6 18 18 6M6 6l12 12"
-              />
-            </svg>
-          </button>
-        </template>
-
-        <template #homeButton>
-          <div class="mx-auto h-20 w-20 bg-slate-700 p-10"></div>
-          <p class="my-5 font-spectral uppercase">La cité en 3D</p>
-          <div class="mx-auto my-5 h-1 w-12 bg-yellow-500"></div>
-          <NuxtLink to="/">Accueil </NuxtLink>
-        </template>
-      </UiSidebar>
-      <UiNavigation :pages="data" v-if="showMenu" @close="showMenu = false" />
-      <header
-        class="duration-400 relative w-full overflow-hidden transition-[height] ease-in-out"
-        :class="heightClasses"
-      >
-        <TresCanvas
-          v-bind="gl"
-          shadows
-          class="duration-400 relative h-full w-full transition-[height] ease-in-out"
+  <main class="relative -z-0 bg-white font-serif text-lg">
+    <header class="fixed left-0 top-0 z-50 flex w-full justify-between p-8">
+      <div>
+        <NuxtLink
+          to="/"
+          class="flex items-center justify-center space-x-3 align-middle"
         >
-          <Experience
-            @is-moving="
-              (value) => {
-                isMoving = value;
-              }
-            "
-          />
-        </TresCanvas>
-      </header>
-      <NuxtPage />
-    </section>
+          <span class="block h-8 w-8 bg-red-400"></span>
+          <span class="block font-spectral font-bold uppercase">Cité 3D</span>
+        </NuxtLink>
+      </div>
+      <nav>
+        <ul class="flex items-center space-x-3">
+          <li><NuxtLink to="/">Accueil</NuxtLink></li>
+          <li><NuxtLink to="/le-project">Le projet</NuxtLink></li>
+          <li><NuxtLink to="/contribuer">Contribuer</NuxtLink></li>
+        </ul>
+      </nav>
+    </header>
+    <div
+      class="left-0 top-0 -z-10 h-[70vh] w-full transition-[transform] duration-100 lg:fixed lg:h-full"
+      :class="classesName"
+    >
+      <TresCanvas v-bind="gl" shadows class="h-full w-full">
+        <Experience @is-moving="(state) => updateState(state)" />
+      </TresCanvas>
+    </div>
+    <NuxtPage
+      class="z-20 h-fit min-h-screen bg-white px-6 py-6 shadow-lg lg:w-1/2 lg:pt-20"
+      v-show="cameraState === 'ARRIVED' && page.title"
+    />
   </main>
 </template>
 
 <script setup lang="ts">
-import { LinearSRGBColorSpace, PCFSoftShadowMap } from "three";
-const showMenu = ref<boolean>(false);
-const { data } = await useAsyncData("parts", () =>
-  queryContent("parts").find(),
-);
-const isMoving = ref(false);
-const heightClasses = computed(() => {
-  return page.value.title && !isMoving.value
-    ? "h-[60vh]"
-    : "h-[calc(100vh-theme(space.12))]";
-});
-
+import { NoToneMapping, PCFSoftShadowMap, SRGBColorSpace } from "three";
 const { page } = useContent();
+type CameraState = "IDLE" | "MOVING" | "ARRIVED";
+
+const cameraState = ref<CameraState>("IDLE");
+
+const updateState = (state: CameraState) => {
+  cameraState.value = state;
+  // console.log("test", cameraState.value);
+};
+
+const classesName = computed(() => ({
+  "translate-x-1/4": page.value.title,
+}));
 
 const gl = {
   alpha: true,
-  shadows: false,
+  shadows: true,
   shadowMap: {
-    autoUpdate: false,
+    autoUpdate: true,
   },
-  disableRender: true,
   shadowMapType: PCFSoftShadowMap,
-  outputColorSpace: LinearSRGBColorSpace,
+  outputColorSpace: SRGBColorSpace,
+  toneMapping: NoToneMapping,
 };
 </script>

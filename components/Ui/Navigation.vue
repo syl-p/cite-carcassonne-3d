@@ -1,7 +1,9 @@
 <template>
-  <div class="z-50 h-screen w-full p-4">
+  <div
+    class="fixed left-0 top-0 z-50 flex h-screen w-full flex-col items-center justify-center bg-primary p-4"
+  >
     <div class="mb-3 mb-6 border-b border-gray-300 pb-6">
-      <h3 class="text-3xl">Liste des parties de la cités</h3>
+      <h3 class="text-3xl">Structure de la cité</h3>
     </div>
     <nav>
       <ul class="space-y-4">

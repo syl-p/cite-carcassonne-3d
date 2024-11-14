@@ -9,10 +9,6 @@ export default {
     "./error.vue",
   ],
   theme: {
-    fontFamily: {
-      serif: ["ui-serif", "Times New Roman", "Times, serif"],
-      spectral: ["Spectral", "ui-serif", "Times New Roman", "Times, serif"],
-    },
     extend: {
       colors: {
         primary: "#E9DDD1",

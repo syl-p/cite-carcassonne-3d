@@ -44,7 +44,7 @@ export default (initialOffset: THREE.Vector3, enabled: ShallowRef<Boolean>) => {
   const { onLoop } = useRenderLoop();
 
   onLoop(({ delta }) => {
-    if (camera.value) {
+    if (camera.value && enabled.value) {
       let idealOffset = calculateOffset(
         currentPart.value,
         currentPartOffset.value,
@@ -69,18 +69,22 @@ export default (initialOffset: THREE.Vector3, enabled: ShallowRef<Boolean>) => {
         cameraState.value = "ARRIVED";
       }
 
-      if (
-        cameraState.value === "ARRIVED" &&
-        (!positionReached || !lookAtReached)
-      ) {
-        cameraState.value = "IDLE";
-      }
+      // if (
+      //   cameraState.value === "ARRIVED" &&
+      //   (!positionReached || !lookAtReached)
+      // ) {
+      //   cameraState.value = "IDLE";
+      // }
     }
   });
 
-  watch([page], () => {
-    cameraState.value = "IDLE";
-  });
+  watch(
+    [page],
+    () => {
+      cameraState.value = "IDLE";
+    },
+    { immediate: true },
+  );
 
   return { cameraState };
 };

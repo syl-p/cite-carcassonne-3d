@@ -69,11 +69,19 @@ watch(
   },
 );
 
-watch([cameraState, page], (value, old) => {
-  emit("isMoving", value[0]);
-  // NO RESIZE ON PREV/NEXT PAGE
-  // if ((old[1].title && !value[1].title) || (value[1].title && !old[1].title)) {
-  //   emit("isMoving", value[0]);
-  // }
-});
+watch(
+  [cameraState, page],
+  (value, old) => {
+    emit("isMoving", value[0]);
+    // NO RESIZE ON PREV/NEXT PAGE
+    // if (
+    //   (old && old[1].title && !value[1].title) ||
+    //   (value[1].title && !old[1].title)
+    // ) {
+    //   // emit("isMoving", value[0]);
+    //   emit("isMoving", value[0]);
+    // }
+  },
+  { immediate: true },
+);
 </script>

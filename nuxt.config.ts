@@ -2,6 +2,9 @@
 export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: ["@tresjs/nuxt", "@nuxt/content", "@pinia/nuxt", "@vueuse/nuxt"],
+  pinia: {
+    storesDirs: ["./stores/**"],
+  },
   css: ["~/assets/css/main.css"],
   postcss: {
     plugins: {
@@ -11,5 +14,9 @@ export default defineNuxtConfig({
   },
   content: {
     documentDriven: true,
+  },
+  runtimeConfig: {
+    mongoUrl: process.env.MONGO_URL,
+    jwtSecret: process.env.JWT_SECRET,
   },
 });

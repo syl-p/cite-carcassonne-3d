@@ -1,8 +1,8 @@
 <template>
   <Transition name="fade">
-    <article class="lg:mt-20">
-      <header class="relative mb-8 w-full p-8 transition-all">
-        <NuxtLink to="/" class="text-xl lg:text-3xl"
+    <article class="mt-8 lg:mt-24">
+      <header class="relative mb-3 w-full px-12 transition-all">
+        <NuxtLink to="/" class="text-xl lg:text-2xl"
           >Découvrir la cité</NuxtLink
         >
         <h1 class="mb-3 border-b-black text-4xl font-bold lg:text-6xl">
@@ -11,11 +11,11 @@
         <p>{{ page.description }}</p>
       </header>
 
-      <section>
+      <section class="mb-3">
         <UiGalerie />
       </section>
 
-      <section class="prose prose-lg p-8 prose-p:text-black">
+      <section class="prose prose-lg px-12 prose-p:text-black">
         <ContentDoc />
       </section>
     </article>

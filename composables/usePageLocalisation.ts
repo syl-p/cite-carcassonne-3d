@@ -5,7 +5,7 @@ type CameraState = "IDLE" | "MOVING" | "ARRIVED";
 export default (initialOffset: THREE.Vector3, enabled: ShallowRef<Boolean>) => {
   const currentPosition = ref(new THREE.Vector3());
   const currentLookAt = ref(new THREE.Vector3());
-  const { camera, scene } = useTresContext();
+  const { camera, scene, controls } = useTresContext();
   const { page } = useContent();
   const cameraState = ref<CameraState>("IDLE");
 
@@ -44,7 +44,7 @@ export default (initialOffset: THREE.Vector3, enabled: ShallowRef<Boolean>) => {
   const { onLoop } = useRenderLoop();
 
   onLoop(({ delta }) => {
-    if (camera.value && enabled.value) {
+    if (camera.value && cameraState.value !== "ARRIVED" && enabled.value) {
       let idealOffset = calculateOffset(
         currentPart.value,
         currentPartOffset.value,
@@ -59,6 +59,11 @@ export default (initialOffset: THREE.Vector3, enabled: ShallowRef<Boolean>) => {
       currentLookAt.value.lerp(currentPart.value, delta);
       camera.value.position.copy(currentPosition.value);
       camera.value.lookAt(currentLookAt.value);
+
+      if (controls.value) {
+        // console.log("ok control", controls.value);
+        controls.value.target.lerp(currentLookAt.value, delta);
+      }
 
       const positionReached =
         currentPosition.value.distanceTo(idealOffset) < 0.1;

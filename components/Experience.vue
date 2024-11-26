@@ -1,5 +1,11 @@
 <template>
-  <TresPerspectiveCamera :args="[70, 1, 0.1, 1000]" />
+  <TresPerspectiveCamera :args="[70, 1, 0.1, 1000]" :position="initialOffset" />
+  <OrbitControls
+    :make-default="true"
+    :enableDamping="false"
+    :enablePan="false"
+    :enableZoom="false"
+  />
   <TresAmbientLight :intensity="1.5" />
   <TresDirectionalLight cast-shadow :position="[-4, 8, 6]" :intensity="1.5" />
   <Suspense
@@ -72,6 +78,7 @@ watch(
   [cameraState, page],
   (value, old) => {
     emit("isMoving", value[0]);
+    console.log(value[0]);
     // NO RESIZE ON PREV/NEXT PAGE
     // if (
     //   (old && old[1].title && !value[1].title) ||

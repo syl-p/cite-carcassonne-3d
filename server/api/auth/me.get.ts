@@ -11,6 +11,9 @@ export default defineEventHandler(async (event) => {
   try {
     const decoded = jwt.verify(token, useRuntimeConfig().jwtSecret);
     const user = await User.findById(decoded.userId).select("-password");
+    if (!user)
+      return createError({ statusCode: 401, message: "User not found" });
+
     return { ...user.toObject() };
   } catch (error) {
     throw createError({ statusCode: 401, message: "Invalid token" });

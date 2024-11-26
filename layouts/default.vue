@@ -35,7 +35,7 @@ const cameraState = ref<CameraState>("IDLE");
 
 const updateState = (state: CameraState) => {
   cameraState.value = state;
-  console.log("test", cameraState.value);
+  // console.log("test", cameraState.value);
 };
 
 const gl = {

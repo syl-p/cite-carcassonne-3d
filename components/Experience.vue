@@ -53,12 +53,11 @@ const changeOutline = (objects: Array<THREE.Object3D>) => {
 watch(
   [page, scene, loaded],
   (value) => {
-    console.log(value[2]);
     if (value[0]?.title && value[1] && value[2]) {
       // Traverse Scene
       value[1].traverse((child: THREE.Object3D) => {
         if (value[0].object_name == child.name) {
-          console.log("outlined", child.name);
+          // console.log("outlined", child.name);
           changeOutline([child]);
         }
       });

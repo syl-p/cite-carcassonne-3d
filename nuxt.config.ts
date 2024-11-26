@@ -19,4 +19,12 @@ export default defineNuxtConfig({
     mongoUrl: process.env.MONGO_URL,
     jwtSecret: process.env.JWT_SECRET,
   },
+  nitro: {
+    storage: {
+      fs: {
+        driver: "fs",
+        base: "./public",
+      },
+    },
+  },
 });

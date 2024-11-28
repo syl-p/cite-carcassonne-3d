@@ -70,14 +70,14 @@
         >
           Sign in
         </button>
-        <!-- <p class="text-sm font-light text-gray-500 dark:text-gray-400">
+        <p class="text-sm font-light text-gray-500 dark:text-gray-400">
           Don’t have an account yet?
-          <a
-            href="#"
+          <NuxtLink
+            to="/sign-up"
             class="text-primary-600 dark:text-primary-500 font-medium hover:underline"
-            >Sign up</a
+            >Sign up</NuxtLink
           >
-        </p> -->
+        </p>
       </form>
     </div>
   </div>

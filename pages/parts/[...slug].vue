@@ -17,7 +17,7 @@
           <section class="mb-6">
             <UiGaleriePreview />
           </section>
-          <section class="prose prose-lg prose-p:text-black lg:px-12">
+          <section class="prose prose-lg px-8 prose-p:text-black lg:px-12">
             <ContentDoc />
           </section>
         </template>
@@ -45,7 +45,6 @@
 <script setup lang="ts">
 const { page, toc } = useContent();
 const route = useRoute();
-console.log(route, page.value._path);
 
 const tabs = [
   { name: "description", label: "Description" },

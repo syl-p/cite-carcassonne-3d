@@ -11,7 +11,7 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: "#E9DDD1",
+        primary: "#facc15",
         accent: "",
         page: "#fdfcf5",
       },

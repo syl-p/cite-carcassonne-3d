@@ -1,7 +1,8 @@
 import { Medium } from "~/server/models/Medium.model";
+import protectRoute from "~/server/protectRoute";
 
 export default defineEventHandler(async (event) => {
-  // await protectRoute(event);
+  await protectRoute(event);
 
   try {
     const files = await readMultipartFormData(event);
@@ -15,6 +16,7 @@ export default defineEventHandler(async (event) => {
       await Medium.create({
         filename: file.filename,
         path: `/${file.filename}`,
+        user: event.context.user,
       });
     }
 

@@ -11,7 +11,8 @@ export default async (event: H3Event<EventHandlerRequest>) => {
 
   try {
     const decoded = jwt.verify(token, config.jwtSecret);
-    event.context.user = decoded;
+    //@ts-ignore
+    event.context.user = decoded.userId;
   } catch (error) {
     throw createError({ statusCode: 401, message: "Token invalide" });
   }

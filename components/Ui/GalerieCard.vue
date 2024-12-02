@@ -1,7 +1,5 @@
 <template>
-  <div>
-    <img :src="path" class="h-auto max-w-full rounded-lg" />
-  </div>
+  <img :src="path" class="h-full w-full rounded-xl object-cover" />
 </template>
 
 <script setup lang="ts">

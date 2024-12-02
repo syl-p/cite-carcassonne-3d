@@ -2,7 +2,7 @@ import { Medium } from "~/server/models/Medium.model";
 
 export default defineEventHandler(async (event) => {
   try {
-    const files = await Medium.find();
+    const files = await Medium.find().populate("user", "username");
     if (!files) {
       return createError({ statusCode: 401, message: "no Media" });
     }

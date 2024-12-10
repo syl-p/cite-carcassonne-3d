@@ -1,8 +1,10 @@
 import { Medium } from "~/server/models/Medium.model";
 
 export default defineEventHandler(async (event) => {
+  const part = getRouterParam(event, "part") ?? "";
+
   try {
-    const files = await Medium.find().populate("user", "username");
+    const files = await Medium.find({ part }).populate("user", "username");
     if (!files) {
       return createError({ statusCode: 401, message: "no Media" });
     }

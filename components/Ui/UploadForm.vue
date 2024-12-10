@@ -1,7 +1,14 @@
 <template>
   <form @submit.prevent="handleUpload" type="multipart/form-data">
-    <UiDropFiles @change="change" />
-    <ul class="mb-3 divide-y divide-gray-200">
+    {{ message }}
+    <UiDropFiles @change="change">
+      <template v-slot:label>
+        <span class="font-semibold">Cliquer ici</span> ou faite glisser
+      </template>
+
+      <template v-slot:description> PNG ou JPG (MAX. 800x400px) </template>
+    </UiDropFiles>
+    <ul class="mt-3 divide-y divide-gray-200">
       <li
         v-for="(file, index) in filesPreview"
         :key="index"
@@ -39,9 +46,10 @@
       </li>
     </ul>
 
-    <div class="text-right">
+    <div class="mt-8 text-right">
+      <p v-if="loading">Upload en cours...</p>
       <button
-        :disabled="!filesPreview.length"
+        :disabled="!filesPreview.length || loading"
         type="submit"
         class="hover:bg-primary-700 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 w-full rounded-lg bg-primary px-5 py-2.5 text-center text-sm font-medium text-white focus:outline-none focus:ring-4 disabled:bg-gray-100"
       >
@@ -52,13 +60,12 @@
 </template>
 
 <script setup lang="ts">
+import type { FilePreview } from "~/utils/types";
+const { part } = defineProps(["part"]);
+const emit = defineEmits(["finish"]);
+const message = ref<string>("");
+const loading = ref(false);
 const token = useCookie("authToken");
-type FilePreview = {
-  file: File;
-  name: string;
-  path: string;
-};
-
 const filesPreview = ref<FilePreview[]>([]);
 
 function change(files: FileList) {
@@ -90,6 +97,7 @@ const handleUpload = async () => {
   if (!filesPreview.value.length) return;
   if (!token.value) return;
 
+  loading.value = true;
   const formData = new FormData();
   for (const item of filesPreview.value) {
     formData.append(
@@ -100,7 +108,7 @@ const handleUpload = async () => {
   }
 
   try {
-    const res = await $fetch("/api/media/upload", {
+    const res = await $fetch(`/api/media/${part}/upload`, {
       method: "POST",
       body: formData,
       headers: {
@@ -108,9 +116,12 @@ const handleUpload = async () => {
       },
     });
 
-    console.log(res);
+    emit("finish", res);
   } catch (e) {
+    message.value = e?.message;
     console.error(e);
+  } finally {
+    loading.value = false;
   }
 };
 </script>

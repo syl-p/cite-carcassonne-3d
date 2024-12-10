@@ -9,10 +9,12 @@ import * as THREE from "three";
 const { scene, materials } = await useGLTF(
   "/models/cite-carcassonne-export/cite-carcassonne.gltf",
 );
-const { alphaMap } = await useTexture({ alphaMap: "/alpha-map.png" });
 
+const currentElementMaterial = new THREE.MeshStandardMaterial({ color: "red" });
+const { alphaMap } = await useTexture({ alphaMap: "/alpha-map.png" });
 const emit = defineEmits(["select"]);
-const { camera } = useTresContext();
+
+const { page } = useContent();
 
 // Apply alpha texture on material
 ["material_0", "wall"].forEach((name) => {
@@ -54,29 +56,36 @@ const { camera } = useTresContext();
   };
 });
 
-scene.traverse((child: THREE.Object3D) => {
+scene.traverse((child: THREE.Mesh) => {
   if (child.isMesh && child.material) {
     child.material =
       child.name == "Terrain" ? materials["material_0"] : materials["wall"];
-    child.castShadow = true;
-    child.receiveShadow = true;
+    // child.castShadow = true;
+    // child.receiveShadow = true;
   }
 });
 
-/*const raycaster = new THREE.Raycaster();
-const pointer = new THREE.Vector2();
-
-window.addEventListener("click", (event) => {
-  if (!camera.value) return;
-
-  pointer.x = (event.clientX / window.innerWidth) * 2 - 1;
-  pointer.y = -(event.clientY / window.innerHeight) * 2 + 1;
-  raycaster.setFromCamera(pointer, camera.value);
-
-  const intersects = raycaster.intersectObjects(scene.children);
-  emit(
-    "select",
-    intersects.map((o) => o.object),
-  );
-});*/
+watchEffect(() => {
+  if (page.value.title) {
+    scene.traverse((child) => {
+      if (child.isMesh && child.material) {
+        if (child.name === page.value.object_name) {
+          child.material = currentElementMaterial;
+        } else {
+          child.material =
+            child.name == "Terrain"
+              ? materials["material_0"]
+              : materials["wall"];
+        }
+      }
+    });
+  } else {
+    scene.traverse((child) => {
+      if (child.isMesh && child.material) {
+        child.material =
+          child.name == "Terrain" ? materials["material_0"] : materials["wall"];
+      }
+    });
+  }
+});
 </script>

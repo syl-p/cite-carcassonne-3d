@@ -1,22 +1,15 @@
 import { model, Schema } from "mongoose";
-import bcrypt from "bcryptjs";
-import { generateHash } from "../utils/hash";
 import { User } from "~/server/models/User.model";
 
-export interface Medium extends Document {
-  path: string;
-  filename: string;
+export interface Comment extends Document {
+  content: string;
   user: User;
   part: string;
 }
 
-const mediumSchema = new Schema(
+const CommentSchema = new Schema(
   {
-    path: {
-      type: String,
-      required: true,
-    },
-    filename: {
+    content: {
       type: String,
       required: true,
     },
@@ -34,4 +27,4 @@ const mediumSchema = new Schema(
   },
 );
 
-export const Medium = model<Medium>("Medium", mediumSchema);
+export const Comment = model<Comment>("Comment", CommentSchema);

@@ -2,7 +2,7 @@
   <main class="relative -z-0 bg-white text-lg">
     <UiNavigation />
     <div
-      class="relative z-10 w-full overflow-hidden transition-transform duration-700 ease-in-out lg:fixed lg:left-0 lg:top-0 lg:h-full"
+      class="relative z-10 w-full overflow-hidden bg-white transition-transform duration-700 ease-in-out lg:fixed lg:left-0 lg:top-0 lg:h-full"
       :class="page.title ? 'h-[70vh] lg:w-[50vw]' : 'h-screen lg:w-screen'"
     >
       <TresCanvas

@@ -3,7 +3,9 @@
     <UiNavigation />
     <div
       class="relative z-10 w-full overflow-hidden bg-white transition-transform duration-700 ease-in-out lg:fixed lg:left-0 lg:top-0 lg:h-full"
-      :class="page.title ? 'h-[70vh] lg:w-[50vw]' : 'h-screen lg:w-screen'"
+      :class="
+        page && page.title ? 'h-[70vh] lg:w-[50vw]' : 'h-screen lg:w-screen'
+      "
     >
       <TresCanvas
         v-bind="gl"
@@ -13,13 +15,13 @@
         <Experience @is-moving="(state) => updateState(state)" />
       </TresCanvas>
 
-      <div class="absolute bottom-8 left-8 w-full" v-if="page.title">
+      <div class="absolute bottom-8 left-8 w-full" v-if="page && page.title">
         <UiPreviousNext />
       </div>
     </div>
     <div
       class="z-20 flex flex-1 flex-col justify-center bg-white lg:ml-[50vw] lg:w-[50vw]"
-      v-show="page.title"
+      v-show="page && page.title"
     >
       <slot />
     </div>

@@ -27,9 +27,10 @@
 
       <UiTab name="Commentaires">
         <div class="px-8 lg:px-12">
-          <template v-for="i in 5">
-            <UiChatBubble />
-          </template>
+          <Suspense>
+            <LazyComments :part="page.object_name" />
+            <template #fallback> Chargement des commentaires </template>
+          </Suspense>
         </div>
       </UiTab>
     </UiTabs>

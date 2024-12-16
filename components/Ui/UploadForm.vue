@@ -1,6 +1,8 @@
 <template>
   <form @submit.prevent="handleUpload" type="multipart/form-data">
-    {{ message }}
+    <UiAlert v-if="message" type="danger">
+      {{ message }}
+    </UiAlert>
     <UiDropFiles @change="change">
       <template v-slot:label>
         <span class="font-semibold">Cliquer ici</span> ou faite glisser

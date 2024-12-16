@@ -6,9 +6,12 @@
       <h1
         class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white"
       >
-        Se connecter
+        Bon retour parmi nous.
       </h1>
       <form class="space-y-4 md:space-y-6" @submit.prevent="login()">
+        <UiAlert v-if="message" type="danger">
+          {{ message }}
+        </UiAlert>
         <div>
           <label
             for="email"
@@ -68,14 +71,14 @@
           type="submit"
           class="hover:bg-primary-700 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 w-full rounded-lg bg-primary px-5 py-2.5 text-center text-sm font-medium text-white focus:outline-none focus:ring-4"
         >
-          Sign in
+          Se connecter
         </button>
         <p class="text-sm font-light text-gray-500 dark:text-gray-400">
-          Don’t have an account yet?
+          Vous n'avez pas encore de compte ?
           <NuxtLink
             to="/sign-up"
             class="text-primary-600 dark:text-primary-500 font-medium hover:underline"
-            >Sign up</NuxtLink
+            >S'inscrire</NuxtLink
           >
         </p>
       </form>
@@ -92,16 +95,21 @@ const store = useUserStore();
 const { setUser } = store;
 const email = ref("");
 const password = ref("");
+const message = ref("");
 
 async function login() {
-  const response = await $fetch("/api/auth/login", {
-    method: "POST",
-    body: { email: email.value, password: password.value },
-  });
+  try {
+    const response = await $fetch("/api/auth/login", {
+      method: "POST",
+      body: { email: email.value, password: password.value },
+    });
 
-  const tokenCookie = useCookie("authToken");
-  tokenCookie.value = response.token; // Assure-toi que `response.token` existe
-  setUser(response.user);
-  navigateTo("/dashboard");
+    const tokenCookie = useCookie("authToken");
+    tokenCookie.value = response.token; // Assure-toi que `response.token` existe
+    setUser(response.user);
+    navigateTo("/dashboard");
+  } catch {
+    message.value = "Erreur lors de l'authentification.";
+  }
 }
 </script>

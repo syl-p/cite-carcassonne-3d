@@ -62,7 +62,6 @@ const { page } = useContent();
 const { userInfo } = storeToRefs(store);
 const { part } = defineProps(["part"]);
 const { data } = await useFetch(`/api/media/${part}/all`);
-console.log(data);
 
 const slider = templateRef("slider");
 let isDragging = false;

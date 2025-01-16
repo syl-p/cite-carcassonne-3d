@@ -107,7 +107,12 @@ async function login() {
     const tokenCookie = useCookie("authToken");
     tokenCookie.value = response.token; // Assure-toi que `response.token` existe
     setUser(response.user);
-    navigateTo("/dashboard");
+    toast.add({
+      title: "Vous êtes connecté !",
+      description:
+        "Vous pouvez commenter et partager votre plus beau souvenir de la cité !",
+    });
+    navigateTo("/");
   } catch {
     message.value = "Erreur lors de l'authentification.";
   }

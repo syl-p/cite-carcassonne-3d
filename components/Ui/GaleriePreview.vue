@@ -5,6 +5,7 @@
       class="flex w-full cursor-grab snap-x snap-mandatory space-x-4 overflow-x-auto scroll-smooth"
     >
       <div
+        @click="showImageInModal(index)"
         v-if="data"
         v-for="(item, index) in data"
         :key="index"
@@ -15,6 +16,12 @@
       <div v-else>Gallerie vide pour cette partie.</div>
     </div>
   </div>
+
+  <UModal v-model="isOpen">
+    <div class="p-4" v-if="selectedIndex != null && data">
+      <img :src="`/uploads/${data![selectedIndex].path}`" class="w-full" />
+    </div>
+  </UModal>
 
   <a
     @click.prevent="toggleDialog()"
@@ -63,12 +70,20 @@ const { userInfo } = storeToRefs(store);
 const { part } = defineProps(["part"]);
 const { data } = await useFetch(`/api/media/${part}/all`);
 
+const isOpen = ref(false);
+const selectedIndex = ref<number>(null);
+
 const slider = templateRef("slider");
 let isDragging = false;
 let startX = 0;
 let scrollTo = 0;
 
 const dialog = ref<HTMLDialogElement | null>(null);
+
+function showImageInModal(index: number) {
+  isOpen.value = true;
+  selectedIndex.value = index;
+}
 
 async function toggleDialog() {
   if (!userInfo.value) {

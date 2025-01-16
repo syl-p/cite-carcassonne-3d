@@ -1,7 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: true },
-  modules: ["@tresjs/nuxt", "@nuxt/content", "@pinia/nuxt", "@vueuse/nuxt"],
+  modules: ["@tresjs/nuxt", "@nuxt/content", "@pinia/nuxt", "@vueuse/nuxt", "@nuxt/ui"],
   pinia: {
     storesDirs: ["./stores/**"],
   },

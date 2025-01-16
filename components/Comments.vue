@@ -58,6 +58,7 @@ const loading = ref(false);
 const message = ref<string>("");
 const { data } = await useFetch(`/api/comments/${part}/all`);
 const content = defineModel();
+const toast = useToast();
 
 const handleUpload = async () => {
   if (!form.value || !data.value) return;
@@ -76,6 +77,9 @@ const handleUpload = async () => {
     data.value = [res, ...data?.value];
     form.value.reset();
     content.value = "";
+    toast.add({
+      title: "Votre commentaire à été posté !",
+    });
   } catch (e) {
     message.value = e?.message;
     console.error(e);

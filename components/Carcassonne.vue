@@ -1,7 +1,6 @@
 <template>
   <primitive :object="scene" :scale="0.01"></primitive>
   <Spot v-if="scene" />
-  <LazyBakeShadows />
 </template>
 
 <script setup lang="ts">
@@ -13,11 +12,10 @@ const { scene, materials } = await useGLTF(
 const currentElementMaterial = new THREE.MeshStandardMaterial({ color: "red" });
 const { alphaMap } = await useTexture({ alphaMap: "/alpha-map.png" });
 const emit = defineEmits(["select"]);
-
 const { page } = useContent();
 
 // Apply alpha texture on material
-["material_0", "wall"].forEach((name) => {
+["material_0.001", "wall"].forEach((name) => {
   materials[name].onBeforeCompile = (shader) => {
     shader.uniforms.alphaTexture = {
       value: alphaMap,
@@ -43,7 +41,7 @@ const { page } = useContent();
       `#include <dithering_fragment>`,
       `
           // Calcul des coordonnées de la texture alpha
-          vec2 textureCoords = (vPosition.xz * 0.09) + 0.5;
+          vec2 textureCoords = (vPosition.xz * 0.1) + 0.5;
           vec4 textureColor = texture2D(alphaTexture, textureCoords);
           float alpha = textureColor.a;
 
@@ -56,16 +54,14 @@ const { page } = useContent();
   };
 });
 
-scene.traverse((child: THREE.Mesh) => {
-  if (child.isMesh && child.material) {
-    child.material =
-      child.name == "Terrain" ? materials["material_0"] : materials["wall"];
-    // child.castShadow = true;
-    // child.receiveShadow = true;
-  }
-});
+// scene.traverse((child: THREE.Mesh) => {
+//   if (child.isMesh && child.material) {
+//     child.material =
+//       child.name == "Terrain" ? materials["material_0.001"] : materials["wall"];
+//   }
+// });
 
-watchEffect(() => {
+/*watchEffect(() => {
   if (page.value.title) {
     scene.traverse((child) => {
       if (child.isMesh && child.material) {
@@ -87,5 +83,5 @@ watchEffect(() => {
       }
     });
   }
-});
+});*/
 </script>

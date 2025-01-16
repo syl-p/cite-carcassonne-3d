@@ -5,9 +5,9 @@ export default z
     username: z.string().min(3).max(50),
     email: z.string().email(),
     password: z.string().min(8),
-    passwordConfirm: z.string().min(8),
+    password_confirmation: z.string().min(8),
   })
-  .refine((data) => data.password === data.passwordConfirm, {
+  .refine((data) => data.password === data.password_confirmation, {
     message: "Password do not match",
     path: ["passwordConfirm"],
   });

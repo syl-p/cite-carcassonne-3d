@@ -1,9 +1,9 @@
 <template>
   <main class="relative -z-0 bg-white text-lg">
     <UiNavigation />
-    <UContainer class="mt-18">
+    <UContainer>
       <div
-        class="relative z-10 h-[80vh] w-full overflow-hidden bg-white transition-transform duration-700 ease-in-out"
+        class="border-secondary relative z-10 h-[60vh] w-full overflow-hidden border-4 bg-white transition-transform duration-700 ease-in-out"
       >
         <TresCanvas
           v-bind="gl"
@@ -20,6 +20,17 @@
       <div class="z-20 bg-white" v-show="page && page.title">
         <slot />
       </div>
+
+      <div class="z-20 mt-6 space-x-3 bg-white lg:flex" v-if="!page.title">
+        <h2 class="mb-3 w-1/3 text-3xl">
+          Quelle partie de la cité souhaitez vous visiter ?
+        </h2>
+        <ul class="list-disc">
+          <li v-for="part in data">
+            <NuxtLink :to="part._path">{{ part.title }}</NuxtLink>
+          </li>
+        </ul>
+      </div>
     </UContainer>
   </main>
 </template>
@@ -35,6 +46,10 @@ const updateState = (state: CameraState) => {
   cameraState.value = state;
   // console.log("test", cameraState.value);
 };
+
+const { data } = await useAsyncData("parts", () =>
+  queryContent("parts").find(),
+);
 
 const gl = {
   alpha: true,

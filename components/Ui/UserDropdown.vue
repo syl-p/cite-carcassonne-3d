@@ -43,4 +43,6 @@ const dropDownLinks: DropdownItem[][] = [
     },
   ],
 ];
+
+function logout() {}
 </script>

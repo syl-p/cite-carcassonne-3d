@@ -1,5 +1,5 @@
 <template>
-  <header class="fixed left-0 top-0 z-50 w-full p-8">
+  <header class="z-50 w-full py-8">
     <UContainer class="flex justify-between">
       <div>
         <NuxtLink

@@ -1,30 +1,26 @@
 <template>
   <main class="relative -z-0 bg-white text-lg">
     <UiNavigation />
-    <div
-      class="relative z-10 w-full overflow-hidden bg-white transition-transform duration-700 ease-in-out lg:fixed lg:left-0 lg:top-0 lg:h-full"
-      :class="
-        page && page.title ? 'h-[70vh] lg:w-[50vw]' : 'h-screen lg:w-screen'
-      "
-    >
-      <TresCanvas
-        v-bind="gl"
-        shadows
-        class="h-full w-full transition-transform duration-700 ease-in-out"
+    <UContainer class="mt-18">
+      <div
+        class="relative z-10 h-[80vh] w-full overflow-hidden bg-white transition-transform duration-700 ease-in-out"
       >
-        <Experience @is-moving="(state) => updateState(state)" />
-      </TresCanvas>
+        <TresCanvas
+          v-bind="gl"
+          shadows
+          class="h-full w-full transition-transform duration-700 ease-in-out"
+        >
+          <Experience @is-moving="(state) => updateState(state)" />
+        </TresCanvas>
 
-      <div class="absolute bottom-8 left-8 w-full" v-if="page && page.title">
-        <UiPreviousNext />
+        <div class="absolute bottom-8 left-8 w-full" v-if="page && page.title">
+          <UiPreviousNext />
+        </div>
       </div>
-    </div>
-    <div
-      class="z-20 flex flex-1 flex-col justify-center bg-white lg:ml-[50vw] lg:w-[50vw]"
-      v-show="page && page.title"
-    >
-      <slot />
-    </div>
+      <div class="z-20 bg-white" v-show="page && page.title">
+        <slot />
+      </div>
+    </UContainer>
   </main>
 </template>
 

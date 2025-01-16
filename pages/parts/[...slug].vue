@@ -1,5 +1,5 @@
 <template>
-  <UContainer class="mt-24" v-if="page">
+  <section class="mt-10" v-if="page">
     <header class="relative mb-6 w-full transition-all">
       <NuxtLink to="/" class="text-xl lg:text-2xl">Découvrir la cité</NuxtLink>
       <h1 class="mb-3 border-b-black text-4xl font-bold lg:text-6xl">
@@ -34,7 +34,7 @@
         </section>
       </template>
     </UTabs>
-  </UContainer>
+  </section>
 </template>
 
 <script setup lang="ts">

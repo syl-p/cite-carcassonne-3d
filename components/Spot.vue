@@ -36,7 +36,7 @@ const { data } = await useAsyncData("parts", () =>
 const { scene } = useTresContext();
 
 const pagesAndObjects = computed(() => {
-  return data.value
+  return scene && scene.value && data.value
     ? data.value.map((p) => {
         let targetedPosition = new Vector3();
         // Traverse scene to assign position

@@ -31,9 +31,11 @@
   <div v-else>
     <p>
       Pour pouvoir commenter, veuillez vous
-      <NuxtLink to="/login" class="font-bold text-primary hover:underline"
+      <!--      <NuxtLink
+        to="/components/login"
+        class="font-bold text-primary hover:underline"
         >connecter</NuxtLink
-      >.
+      >.-->
     </p>
   </div>
 

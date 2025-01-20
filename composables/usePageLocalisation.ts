@@ -47,7 +47,7 @@ export default (initialOffset: THREE.Vector3, enabled: ShallowRef<Boolean>) => {
   const { onLoop } = useRenderLoop();
 
   onLoop(({ delta }) => {
-    if (camera.value && enabled.value) {
+    if (camera && camera.value && enabled.value) {
       if (
         cameraState.value !== "ARRIVED" &&
         cameraState.value !== "RESET POSITION"

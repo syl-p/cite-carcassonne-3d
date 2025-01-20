@@ -12,6 +12,10 @@
       </p>
     </template>
 
+    <template #logout="{ item }">
+      <button @click="logout">Se déconnecter</button>
+    </template>
+
     <template #item="{ item }">
       <span class="truncate">{{ item.label }}</span>
 
@@ -26,7 +30,9 @@
 import type { DropdownItem } from "#ui/types";
 
 const store = useUserStore();
+const { clearUser } = store;
 const { userInfo } = storeToRefs(store);
+const tokenCookie = useCookie("authToken");
 
 const dropDownLinks: DropdownItem[][] = [
   [
@@ -39,10 +45,15 @@ const dropDownLinks: DropdownItem[][] = [
   [
     {
       label: "Sign out",
+      slot: "logout",
       icon: "i-heroicons-arrow-left-on-rectangle",
     },
   ],
 ];
 
-function logout() {}
+function logout() {
+  tokenCookie.value = undefined;
+  clearUser();
+  navigateTo("/");
+}
 </script>

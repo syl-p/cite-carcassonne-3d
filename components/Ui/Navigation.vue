@@ -1,6 +1,9 @@
 <template>
-  <header class="z-50 w-full py-8">
-    <UContainer class="flex justify-between">
+  <header class="fixed left-0 top-0 z-50 w-full py-8">
+    <UContainer
+      class="flex justify-between"
+      :ui="{ constrained: 'max-w-screen-2xl' }"
+    >
       <div>
         <NuxtLink
           to="/"
@@ -18,11 +21,40 @@
         </ul>
       </nav>
       <div>
-        <NuxtLink to="/login" v-if="!userInfo">Se connecter</NuxtLink>
+        <template v-if="!userInfo">
+          <button @click="isOpen = !isOpen">Se connecter</button>
+        </template>
         <UiUserDropdown v-else />
       </div>
     </UContainer>
   </header>
+  <UModal v-model="isOpen" :ui="{ padding: 'p-6' }">
+    <div class="p-6">
+      <UTabs v-model="selected" :items="items" class="w-full">
+        <template #login="{ item }">
+          <Login @logged="isOpen = false" />
+        </template>
+        <template #signup="{ item }">
+          <SignUp @logged="isOpen = false" />
+        </template>
+      </UTabs>
+    </div>
+  </UModal>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const store = useUserStore();
+const { userInfo } = storeToRefs(store);
+const isOpen = ref(false);
+const items = [
+  {
+    slot: "login",
+    label: "Se connecter",
+  },
+  {
+    slot: "signup",
+    label: "S'inscrire",
+  },
+];
+const selected = ref(1);
+</script>

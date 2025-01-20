@@ -87,7 +87,7 @@ function showImageInModal(index: number) {
 
 async function toggleDialog() {
   if (!userInfo.value) {
-    await navigateTo("/login");
+    // await navigateTo("/login");
   }
 
   if (!dialog.value) return;

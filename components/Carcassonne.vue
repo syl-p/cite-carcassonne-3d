@@ -7,6 +7,7 @@
 import * as THREE from "three";
 const { scene, materials } = await useGLTF(
   "/models/cite-carcassonne-export/cite-carcassonne.gltf",
+  { draco: true },
 );
 
 const currentElementMaterial = new THREE.MeshStandardMaterial({ color: "red" });

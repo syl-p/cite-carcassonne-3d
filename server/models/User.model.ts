@@ -1,6 +1,8 @@
 import { model, Schema } from "mongoose";
 import bcrypt from "bcryptjs";
 import { generateHash } from "../utils/hash";
+import { Medium } from "./Medium.model";
+import { Comment } from "./Comment.model";
 
 export interface User extends Document {
   username: string;
@@ -36,6 +38,11 @@ userSchema.pre("save", async function (next) {
   if (!this.isModified("password")) return next;
 
   this.password = await generateHash(this.password);
+});
+
+userSchema.pre("deleteOne", { document: true }, async function () {
+  await Medium.deleteMany({ user: { _id: this._id } });
+  await Comment.deleteMany({ user: { _id: this._id } });
 });
 
 userSchema.methods.comparePassword = async function (password: string) {

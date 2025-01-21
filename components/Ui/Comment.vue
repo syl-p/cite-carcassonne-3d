@@ -9,7 +9,7 @@
             class="mr-2 h-6 w-6 rounded-full"
             src="https://flowbite.com/docs/images/people/profile-picture-2.jpg"
             alt="Michael Gough"
-          />{{ user.username }}
+          />{{ user?.username || "[DELETED]" }}
         </p>
         <p class="text-sm text-gray-600 dark:text-gray-400">
           <time pubdate :datetime="createdAt" :title="createdAt"

@@ -1,7 +1,13 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: true },
-  modules: ["@tresjs/nuxt", "@nuxt/content", "@pinia/nuxt", "@vueuse/nuxt", "@nuxt/ui"],
+  modules: [
+    "@tresjs/nuxt",
+    "@nuxt/content",
+    "@pinia/nuxt",
+    "@vueuse/nuxt",
+    "@nuxt/ui",
+  ],
   pinia: {
     storesDirs: ["./stores/**"],
   },
@@ -25,6 +31,14 @@ export default defineNuxtConfig({
         driver: "fs",
         base: "./public/uploads",
       },
+    },
+  },
+  vite: {
+    build: {
+      minify: false, // Désactive la minification pour voir si ça aide
+    },
+    optimizeDeps: {
+      disabled: true, // Désactive l'optimisation des dépendances
     },
   },
 });

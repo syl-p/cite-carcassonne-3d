@@ -123,7 +123,7 @@ export default (initialOffset: THREE.Vector3, enabled: ShallowRef<Boolean>) => {
     (newPage, oldPage) => {
       if (!oldPage[0]) return;
 
-      if (newPage[0]._path !== oldPage[0]._path) {
+      if (newPage[0] && newPage[0]._path !== oldPage[0]._path) {
         cameraState.value = "RESET POSITION";
       }
     },

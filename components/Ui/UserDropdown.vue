@@ -4,16 +4,24 @@
     :ui="{ item: { disabled: 'cursor-text select-text' } }"
     :popper="{ placement: 'bottom-start' }"
   >
-    <UAvatar src="https://avatars.githubusercontent.com/u/739984?v=4" />
+    <UAvatar>
+      {{ userInfo!.username[0] }}
+    </UAvatar>
 
     <template #account="{ item }">
       <p class="truncate font-medium text-gray-900 dark:text-white">
-        {{ userInfo.username }} ({{ userInfo.email }})
+        {{ userInfo!.username }} ({{ userInfo!.email }})
       </p>
     </template>
 
     <template #logout="{ item }">
-      <button @click="logout">Se déconnecter</button>
+      <button @click="logout" class="flex w-full items-center justify-between">
+        <span class="block">Se déconnecter</span>
+        <UIcon
+          :name="item.icon"
+          class="ms-auto h-4 w-4 flex-shrink-0 text-gray-400 dark:text-gray-500"
+        />
+      </button>
     </template>
 
     <template #item="{ item }">
@@ -40,6 +48,11 @@ const dropDownLinks: DropdownItem[][] = [
       label: "email",
       slot: "account",
       disabled: true,
+    },
+    {
+      label: "Mes informations",
+      href: "/user/settings",
+      icon: "i-heroicons-cog-8-tooth",
     },
   ],
   [

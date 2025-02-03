@@ -3,6 +3,7 @@
   <UForm
     :schema="schema"
     :state="state"
+    :validate="customValidate"
     @submit.prevent="handle"
     class="space-y-4"
   >
@@ -31,6 +32,7 @@
   <UDivider label="OU" class="my-10" />
   <UButton color="red">Supprimer votre compte</UButton>
 </template>
+
 <script setup lang="ts">
 const store = useUserStore();
 const { userInfo } = storeToRefs(store);
@@ -45,17 +47,17 @@ definePageMeta({
 
 const message = ref("");
 const toast = useToast();
-const schema = z
-  .object({
-    username: z.string().min(3).max(50),
-    email: z.string().email(),
-    password: z.string().min(8).optional(),
-    password_confirmation: z.string().min(8).optional(),
-  })
-  .refine((data) => data.password === data.password_confirmation, {
+const schema = z.object({
+  username: z.string().min(3).max(50),
+  email: z.string().email(),
+  password: z.string().min(8).optional(),
+  password_confirmation: z.string().min(8).optional(),
+});
+
+/*  .refine((data) => data.password === data.password_confirmation, {
     message: "Password do not match",
     path: ["passwordConfirm"],
-  });
+  });*/
 
 type Schema = z.output<typeof schema>;
 
@@ -65,6 +67,21 @@ const state = reactive({
   password: undefined,
   password_confirmation: undefined,
 });
+
+const customValidate = (state: any): FormError[] => {
+  const errors = [];
+  if (
+    state.password &&
+    state.password_confirmation &&
+    state.password !== state.password_confirmation
+  ) {
+    errors.push({
+      path: "password_confirmation",
+      message: "Password and password confirmation must be equal",
+    });
+  }
+  return errors;
+};
 
 async function handle(event: FormSubmitEvent<Schema>) {
   try {

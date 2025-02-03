@@ -1,6 +1,7 @@
 import protectRoute from "~/server/protectRoute";
 import jwt from "jsonwebtoken";
 import { User } from "~/server/models/User.model";
+
 export default defineEventHandler(async (event) => {
   await protectRoute(event);
   const body = await readBody(event);

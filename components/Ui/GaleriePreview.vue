@@ -6,14 +6,16 @@
     >
       <div
         @click="showImageInModal(index)"
-        v-if="data"
+        v-if="data && data.length > 0"
         v-for="(item, index) in data"
         :key="index"
         class="h-[300] w-[150px] shrink-0 snap-center rounded-lg lg:h-[350px] lg:w-[200px]"
       >
         <UiGalerieCard :path="`/uploads/${item.path}`" />
       </div>
-      <div v-else>Gallerie vide pour cette partie.</div>
+      <div v-else class="mb-6 w-full rounded-xl border p-6">
+        <p>Aucune photo n'a encore été publiée.</p>
+      </div>
     </div>
   </div>
 

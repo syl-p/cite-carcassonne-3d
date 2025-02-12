@@ -1,7 +1,7 @@
 <template>
   <div class="flex w-full justify-start space-x-3 text-sm">
     <NuxtLink
-      v-if="prev"
+      v-if="prev && prev.object_name"
       :to="prev._path"
       class="flex items-center justify-center space-x-3 rounded-full border border-black p-4"
     >
@@ -22,7 +22,7 @@
       <span class="sr-only"> Éléments Précédent </span>
     </NuxtLink>
     <NuxtLink
-      v-if="next"
+      v-if="next && next.object_name"
       :to="next._path"
       class="flex items-center justify-center space-x-3 rounded-full border border-black p-4"
     >

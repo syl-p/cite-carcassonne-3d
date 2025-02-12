@@ -4,7 +4,8 @@
     :make-default="true"
     :enableDamping="false"
     :enablePan="false"
-    :enableZoom="false"
+    :min-distance="3"
+    :max-distance="4"
     :max-polar-angle="Math.PI * 0.4"
   />
   <TresAmbientLight :intensity="1.5" />

@@ -29,14 +29,14 @@
   </form>
 
   <div v-else>
-    <p>
-      Pour pouvoir commenter, veuillez vous
+    <div class="mb-6 rounded-xl border p-6">
+      <p>Pour pouvoir commenter, veuillez vous connecter</p>
       <!--      <NuxtLink
         to="/components/login"
         class="font-bold text-primary hover:underline"
         >connecter</NuxtLink
       >.-->
-    </p>
+    </div>
   </div>
 
   <template v-for="comment in data" v-if="data.length">
@@ -45,8 +45,8 @@
     }}</UiComment>
   </template>
   <p v-else>
-    Il n'y a pas de commentaire pour cette partie, soit le premier à donner ton
-    avis.
+    Il n'y a pas de commentaire pour cette partie, soyez le premier à donner
+    votre avis avis.
   </p>
 </template>
 

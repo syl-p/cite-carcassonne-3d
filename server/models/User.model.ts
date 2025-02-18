@@ -40,6 +40,16 @@ userSchema.pre("save", async function (next) {
   this.password = await generateHash(this.password);
 });
 
+userSchema.pre("findOneAndUpdate", async function (next) {
+  const update = this.getUpdate() as Partial<User>;
+  if (update && update.password) {
+    update.password = await generateHash(update.password);
+    this.setUpdate(update);
+  }
+
+  return next();
+});
+
 userSchema.pre("deleteOne", { document: true }, async function () {
   await Medium.deleteMany({ user: { _id: this._id } });
   await Comment.deleteMany({ user: { _id: this._id } });

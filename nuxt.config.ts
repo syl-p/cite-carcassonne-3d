@@ -1,6 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: true },
+
   modules: [
     "@tresjs/nuxt",
     "@nuxt/content",
@@ -8,23 +9,31 @@ export default defineNuxtConfig({
     "@vueuse/nuxt",
     "@nuxt/ui",
   ],
+
   pinia: {
     storesDirs: ["./stores/**"],
   },
+
   css: ["~/assets/css/main.css"],
+
   postcss: {
     plugins: {
       tailwindcss: {},
       autoprefixer: {},
     },
   },
+
   content: {
-    documentDriven: true,
+    documentDriven: {
+      injectPage: false,
+    },
   },
+
   runtimeConfig: {
     mongoUrl: process.env.MONGO_URL,
     jwtSecret: process.env.JWT_SECRET,
   },
+
   nitro: {
     storage: {
       fs: {
@@ -33,12 +42,8 @@ export default defineNuxtConfig({
       },
     },
   },
-  vite: {
-    build: {
-      minify: false, // Désactive la minification pour voir si ça aide
-    },
-    optimizeDeps: {
-      disabled: true, // Désactive l'optimisation des dépendances
-    },
-  },
+
+  vite: {},
+
+  compatibilityDate: "2025-02-17",
 });

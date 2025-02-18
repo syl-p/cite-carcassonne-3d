@@ -9,7 +9,6 @@
     >
       <TresCanvas
         v-bind="gl"
-        shadows
         class="h-full w-full transition-transform duration-700 ease-in-out"
       >
         <Experience @is-moving="(state) => updateState(state)" />
@@ -21,7 +20,7 @@
     </div>
     <div
       class="z-20 flex flex-1 flex-col justify-center bg-white lg:ml-[50vw] lg:w-[50vw]"
-      v-show="page && page.title"
+      v-show="page && page.title != ''"
     >
       <slot />
     </div>

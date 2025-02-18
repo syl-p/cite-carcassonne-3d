@@ -1,6 +1,6 @@
 import { User } from "~/server/models/User.model";
-import signupValidator from "~/server/validators/signup.validator";
 import jwt from "jsonwebtoken";
+import signupValidator from "#shared/validators/signup.validator";
 
 export default defineEventHandler(async (event) => {
   const config = useRuntimeConfig();

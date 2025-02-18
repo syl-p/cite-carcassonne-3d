@@ -2,7 +2,6 @@
   <NuxtLayout>
     <NuxtPage />
   </NuxtLayout>
-
   <UNotifications />
 </template>
 
@@ -29,7 +28,6 @@ if (token.value) {
           Authorization: `authorization ${token.value}`,
         },
       });
-
       setUser(userInfo);
     } else {
       clearUserInfo();

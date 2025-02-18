@@ -101,7 +101,7 @@ async function toggleDialog() {
 }
 
 const onFinishUpload = (media) => {
-  console.log(media);
+  // console.log(media);
   if (dialog.value) dialog.value?.close();
   // TODO: SUCCESS ALERT
   // TODO: ADD PIC TO GALERIE

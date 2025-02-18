@@ -11,20 +11,36 @@
       {{ message }}
     </UiAlert>
 
-    <UFormGroup label="Username" name="username">
-      <UInput v-model="state.username" />
-    </UFormGroup>
+    <fieldset class="my-3 rounded-xl border border-dashed p-6">
+      <legend>Vos Informations</legend>
+      <UFormGroup label="Username" name="username" class="mb-6">
+        <UInput v-model="state.username" />
+      </UFormGroup>
 
-    <UFormGroup label="Email" name="email">
-      <UInput v-model="state.email" />
-    </UFormGroup>
+      <UFormGroup label="Email" name="email">
+        <UInput v-model="state.email" />
+      </UFormGroup>
+    </fieldset>
 
-    <UFormGroup label="Password" name="password">
-      <UInput v-model="state.password" type="password" />
-    </UFormGroup>
+    <fieldset class="my-3 rounded-xl border border-dashed p-6">
+      <legend>
+        Facultatif: changement de mot de passe. Laissez vide si vous ne
+        souhaitez pas le modifier
+      </legend>
+      <UFormGroup label="Nouveau mot de passe" name="password" class="mb-6">
+        <UInput v-model="state.password" type="password" />
+      </UFormGroup>
 
-    <UFormGroup label="Password Confirmation" name="password_confirmation">
-      <UInput v-model="state.password_confirmation" type="password" />
+      <UFormGroup
+        label="Mot de passe de confirmation"
+        name="password_confirmation"
+      >
+        <UInput v-model="state.password_confirmation" type="password" />
+      </UFormGroup>
+    </fieldset>
+
+    <UFormGroup label="Mot de passe actuel" name="current_password">
+      <UInput v-model="state.current_password" type="password" />
     </UFormGroup>
 
     <UButton type="submit"> Modifier </UButton>
@@ -37,8 +53,9 @@
 const store = useUserStore();
 const { userInfo } = storeToRefs(store);
 const token = useCookie("authToken");
+import editValidate from "#shared/validators/auth_edit.validator";
 import { z } from "zod";
-import type { FormSubmitEvent } from "#ui/types";
+import type { FormError, FormSubmitEvent } from "#ui/types";
 
 definePageMeta({
   middleware: "auth",
@@ -47,27 +64,18 @@ definePageMeta({
 
 const message = ref("");
 const toast = useToast();
-const schema = z.object({
-  username: z.string().min(3).max(50),
-  email: z.string().email(),
-  password: z.string().min(8).optional(),
-  password_confirmation: z.string().min(8).optional(),
-});
-
-/*  .refine((data) => data.password === data.password_confirmation, {
-    message: "Password do not match",
-    path: ["passwordConfirm"],
-  });*/
-
+const schema = editValidate;
 type Schema = z.output<typeof schema>;
 
 const state = reactive({
   username: userInfo.value!.username,
   email: userInfo.value!.email,
+  current_password: undefined,
   password: undefined,
   password_confirmation: undefined,
 });
 
+// TODO: Refine in Zod Validation not working ?
 const customValidate = (state: any): FormError[] => {
   const errors = [];
   if (
@@ -97,6 +105,7 @@ async function handle(event: FormSubmitEvent<Schema>) {
       title: "Vos informations on bien été modifiées.",
     });
   } catch (error) {
+    console.log(error);
     message.value = "Des erreurs sont présentes dans vos informations.";
   }
 }

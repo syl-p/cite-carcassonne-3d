@@ -4,8 +4,7 @@
     :make-default="true"
     :enableDamping="false"
     :enablePan="false"
-    :min-distance="3"
-    :max-distance="4"
+    :enableZoom="false"
     :max-polar-angle="Math.PI * 0.4"
   />
   <TresAmbientLight :intensity="1.5" />
@@ -42,17 +41,7 @@ const { cameraState } = usePageLocalisation(initialOffset, loaded);
 watch(
   [cameraState, page],
   (value) => {
-    // console.log(value[0]);
     emit("isMoving", value[0]);
-
-    // NO RESIZE ON PREV/NEXT PAGE
-    // if (
-    //   (old && old[1].title && !value[1].title) ||
-    //   (value[1].title && !old[1].title)
-    // ) {
-    //   // emit("isMoving", value[0]);
-    //   emit("isMoving", value[0]);
-    // }
   },
   { immediate: true },
 );

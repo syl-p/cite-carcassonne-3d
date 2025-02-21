@@ -1,6 +1,7 @@
 <template>
   <primitive :object="scene" :scale="0.01"></primitive>
   <Spot v-if="scene" />
+  <BakeShadows />
 </template>
 
 <script setup lang="ts">
@@ -10,10 +11,8 @@ const { scene, materials } = await useGLTF(
   { draco: true },
 );
 
-const currentElementMaterial = new THREE.MeshStandardMaterial({ color: "red" });
 const { alphaMap } = await useTexture({ alphaMap: "/alpha-map.png" });
 const emit = defineEmits(["select"]);
-const { page } = useContent();
 
 // Apply alpha texture on material
 ["material_0.001", "wall"].forEach((name) => {
@@ -42,7 +41,7 @@ const { page } = useContent();
       `#include <dithering_fragment>`,
       `
           // Calcul des coordonnées de la texture alpha
-          vec2 textureCoords = (vPosition.xz * 0.1) + 0.5;
+          vec2 textureCoords = (vPosition.xz * 0.15) + 0.5;
           vec4 textureColor = texture2D(alphaTexture, textureCoords);
           float alpha = textureColor.a;
 

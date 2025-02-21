@@ -46,12 +46,13 @@
     <UButton type="submit"> Modifier </UButton>
   </UForm>
   <UDivider label="OU" class="my-10" />
-  <UButton color="red">Supprimer votre compte</UButton>
+  <UButton color="red" @click="deleteAccount()">Supprimer votre compte</UButton>
 </template>
 
 <script setup lang="ts">
 const store = useUserStore();
 const { userInfo } = storeToRefs(store);
+const { clearUser } = store;
 const token = useCookie("authToken");
 import editValidate from "#shared/validators/auth_edit.validator";
 import { z } from "zod";
@@ -107,6 +108,26 @@ async function handle(event: FormSubmitEvent<Schema>) {
   } catch (error) {
     console.log(error);
     message.value = "Des erreurs sont présentes dans vos informations.";
+  }
+}
+
+async function deleteAccount() {
+  try {
+    await $fetch("/api/auth/delete_account", {
+      method: "DELETE",
+      headers: {
+        Authorization: `authorization ${token.value}`,
+      },
+    });
+
+    toast.add({
+      title: "Votre compte à bien été supprimé !",
+    });
+
+    clearUser();
+  } catch (error) {
+    console.log(error);
+    message.value = "Des erreurs sont survenues";
   }
 }
 </script>

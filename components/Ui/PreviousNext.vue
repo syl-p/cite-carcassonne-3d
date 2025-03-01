@@ -3,7 +3,7 @@
     <NuxtLink
       v-if="prev && prev.object_name"
       :to="prev._path"
-      class="flex items-center justify-center space-x-3 rounded-full border border-black p-4"
+      class="flex items-center justify-center space-x-3 rounded-full border border-black p-4 text-black"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -24,7 +24,7 @@
     <NuxtLink
       v-if="next && next.object_name"
       :to="next._path"
-      class="flex items-center justify-center space-x-3 rounded-full border border-black p-4"
+      class="flex items-center justify-center space-x-3 rounded-full border border-black p-4 text-black"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"

@@ -1,8 +1,8 @@
 <template>
-  <main class="relative -z-0 bg-white text-lg">
+  <main class="relative -z-0 bg-white text-lg dark:bg-slate-700">
     <UiNavigation />
     <div
-      class="relative z-10 w-full overflow-hidden bg-white transition-transform duration-700 ease-in-out lg:fixed lg:left-0 lg:top-0 lg:h-full"
+      class="relative z-10 w-full overflow-hidden bg-white transition-transform duration-700 ease-in-out lg:fixed lg:left-0 lg:top-0 lg:h-full dark:bg-slate-700"
       :class="
         page && page.title ? 'h-[70vh] lg:w-[50vw]' : 'h-screen lg:w-screen'
       "
@@ -19,7 +19,7 @@
       </div>
     </div>
     <div
-      class="z-20 flex flex-1 flex-col justify-center bg-white lg:ml-[50vw] lg:w-[50vw]"
+      class="z-20 flex flex-1 flex-col justify-center bg-white lg:ml-[50vw] lg:w-[50vw] dark:bg-slate-700"
       v-show="page && page.title != ''"
     >
       <slot />

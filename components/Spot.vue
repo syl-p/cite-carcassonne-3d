@@ -8,14 +8,14 @@
       <button
         @click="goTo(pageObject.link)"
         :class="{ 'opacity-40': page.title && page.title != pageObject.title }"
-        class="flex h-8 w-8 flex-col items-center justify-center rounded-full border border-yellow-500 bg-white hover:bg-yellow-500"
+        class="flex h-8 w-8 flex-col items-center justify-center rounded-full border border-yellow-500 bg-white font-bold text-black hover:bg-yellow-500"
       >
         <span class="block">{{ index }}</span>
       </button>
       <div
         class="absolute left-full top-1/2 ml-3 hidden min-w-[200px] -translate-y-1/2 items-center justify-center gap-3 bg-white p-3 group-hover:flex"
       >
-        <div class="flex-1">
+        <div class="flex-1 text-black">
           <h2 class="font-spectral">{{ pageObject.title }}</h2>
           <p>{{ pageObject.description }}</p>
         </div>

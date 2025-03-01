@@ -21,7 +21,9 @@
             <template #fallback> Chargement de la gallerie </template>
           </Suspense>
         </section>
-        <section class="prose prose-lg prose-h2:mt-0 prose-p:text-black">
+        <section
+          class="prose prose-lg prose-h2:mt-0 dark:prose-p:text-white dark:prose-li:text-white"
+        >
           <ContentDoc />
         </section>
       </template>

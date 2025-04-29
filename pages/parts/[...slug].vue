@@ -15,7 +15,7 @@
     </header>
     <UTabs :items="items" class="w-full">
       <template #description="{ item }">
-        <section class="my-12">
+        <section class="my-10">
           <Suspense>
             <LazyUiGaleriePreview :part="page.object_name" />
             <template #fallback> Chargement de la gallerie </template>

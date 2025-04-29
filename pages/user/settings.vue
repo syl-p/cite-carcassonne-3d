@@ -1,52 +1,54 @@
 <template>
-  <h1 class="mb-3 text-3xl">Modifier vos informations</h1>
-  <UForm
-    :schema="schema"
-    :state="state"
-    :validate="customValidate"
-    @submit.prevent="handle"
-    class="space-y-4"
-  >
-    <UiAlert v-if="message" type="danger">
-      {{ message }}
-    </UiAlert>
+  <section class="mt-24 px-8">
+    <h1 class="mb-3 text-3xl">Modifier vos informations</h1>
+    <UForm
+      :schema="schema"
+      :state="state"
+      :validate="customValidate"
+      @submit.prevent="handle"
+      class="space-y-4"
+    >
+      <UiAlert v-if="message" type="danger">
+        {{ message }}
+      </UiAlert>
 
-    <fieldset class="my-3 rounded-xl border border-dashed p-6">
-      <legend>Vos Informations</legend>
-      <UFormGroup label="Username" name="username" class="mb-6">
-        <UInput v-model="state.username" />
+      <fieldset class="my-3 rounded-xl border border-dashed p-6">
+        <legend>Vos Informations</legend>
+        <UFormGroup label="Username" name="username" class="mb-6">
+          <UInput v-model="state.username" />
+        </UFormGroup>
+
+        <UFormGroup label="Email" name="email">
+          <UInput v-model="state.email" />
+        </UFormGroup>
+      </fieldset>
+
+      <fieldset class="my-3 rounded-xl border border-dashed p-6">
+        <legend>
+          Facultatif: changement de mot de passe. Laissez vide si vous ne
+          souhaitez pas le modifier
+        </legend>
+        <UFormGroup label="Nouveau mot de passe" name="password" class="mb-6">
+          <UInput v-model="state.password" type="password" />
+        </UFormGroup>
+
+        <UFormGroup
+          label="Mot de passe de confirmation"
+          name="password_confirmation"
+        >
+          <UInput v-model="state.password_confirmation" type="password" />
+        </UFormGroup>
+      </fieldset>
+
+      <UFormGroup label="Mot de passe actuel" name="current_password">
+        <UInput v-model="state.current_password" type="password" />
       </UFormGroup>
 
-      <UFormGroup label="Email" name="email">
-        <UInput v-model="state.email" />
-      </UFormGroup>
-    </fieldset>
-
-    <fieldset class="my-3 rounded-xl border border-dashed p-6">
-      <legend>
-        Facultatif: changement de mot de passe. Laissez vide si vous ne
-        souhaitez pas le modifier
-      </legend>
-      <UFormGroup label="Nouveau mot de passe" name="password" class="mb-6">
-        <UInput v-model="state.password" type="password" />
-      </UFormGroup>
-
-      <UFormGroup
-        label="Mot de passe de confirmation"
-        name="password_confirmation"
-      >
-        <UInput v-model="state.password_confirmation" type="password" />
-      </UFormGroup>
-    </fieldset>
-
-    <UFormGroup label="Mot de passe actuel" name="current_password">
-      <UInput v-model="state.current_password" type="password" />
-    </UFormGroup>
-
-    <UButton type="submit"> Modifier </UButton>
-  </UForm>
-  <UDivider label="OU" class="my-10" />
-  <UButton color="red" @click="deleteAccount()">Supprimer votre compte</UButton>
+      <UButton type="submit"> Modifier </UButton>
+    </UForm>
+    <UDivider label="OU" class="my-10" />
+    <UButton color="red" @click="deleteAccount()">Supprimer votre compte</UButton>
+  </section>
 </template>
 
 <script setup lang="ts">

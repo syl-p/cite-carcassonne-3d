@@ -5,13 +5,17 @@
       class="flex w-full cursor-grab snap-x snap-mandatory space-x-4 overflow-x-auto scroll-smooth"
     >
       <div
-        @click="showImageInModal(index)"
         v-if="data && data.length > 0"
         v-for="(item, index) in data"
         :key="index"
-        class="h-[300] w-[150px] shrink-0 snap-center rounded-lg lg:h-[350px] lg:w-[200px]"
+        class="h-[200] w-[150px] shrink-0 snap-center rounded-lg relative"
       >
-        <UiGalerieCard :path="`/uploads/${item.path}`" />
+        <a href="#" :title="item.user?.username" class="absolute top-3 right-3 flex flex-col justify-center items-center">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-8 text-white">
+            <path fill-rule="evenodd" d="M18.685 19.097A9.723 9.723 0 0 0 21.75 12c0-5.385-4.365-9.75-9.75-9.75S2.25 6.615 2.25 12a9.723 9.723 0 0 0 3.065 7.097A9.716 9.716 0 0 0 12 21.75a9.716 9.716 0 0 0 6.685-2.653Zm-12.54-1.285A7.486 7.486 0 0 1 12 15a7.486 7.486 0 0 1 5.855 2.812A8.224 8.224 0 0 1 12 20.25a8.224 8.224 0 0 1-5.855-2.438ZM15.75 9a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z" clip-rule="evenodd" />
+          </svg>
+        </a>
+        <UiGalerieCard :item="item" :index="index" @selected="showImageInModal(index)"/>
       </div>
       <div v-else class="mb-6 w-full rounded-xl border p-6">
         <p>Aucune photo n'a encore été publiée.</p>
@@ -26,9 +30,9 @@
   </UModal>
 
   <a
-    @click.prevent="toggleDialog()"
+    @click.prevent="onClick()"
     href="#"
-    class="group relative mt-6 flex cursor-pointer items-center justify-end space-x-2"
+    class="group relative mt-10 flex cursor-pointer items-center justify-end space-x-2"
   >
     <span
       class="relative z-10 text-sm font-bold uppercase leading-6 tracking-wide before:absolute before:-left-6 before:-top-1/2 before:-z-10 before:h-12 before:w-12 before:rounded-full before:bg-yellow-400 before:content-[''] group-hover:underline"
@@ -67,8 +71,11 @@
 </template>
 <script setup lang="ts">
 const store = useUserStore();
-const { page } = useContent();
 const { userInfo } = storeToRefs(store);
+const appStore = useAppStore();
+const { setModalVisible } = appStore;
+
+const { page } = useContent();
 const { part } = defineProps(["part"]);
 const { data } = await useFetch(`/api/media/${part}/all`);
 
@@ -87,19 +94,6 @@ function showImageInModal(index: number) {
   selectedIndex.value = index;
 }
 
-async function toggleDialog() {
-  if (!userInfo.value) {
-    // await navigateTo("/login");
-  }
-
-  if (!dialog.value) return;
-  if (dialog.value.open) {
-    dialog.value.close();
-  } else {
-    dialog.value.showModal();
-  }
-}
-
 const onFinishUpload = (media) => {
   // console.log(media);
   if (dialog.value) dialog.value?.close();
@@ -107,6 +101,14 @@ const onFinishUpload = (media) => {
   // TODO: ADD PIC TO GALERIE
   data.value = [...data.value, ...media];
 };
+
+const onClick = () => {
+  if (userInfo.value) {
+    if (dialog.value) dialog.value?.showModal();
+  } else {
+    setModalVisible(true);
+  }
+}
 
 onMounted(() => {
   if (dialog.value) {

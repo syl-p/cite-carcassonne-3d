@@ -1,6 +1,4 @@
 import { model, Schema } from "mongoose";
-import bcrypt from "bcryptjs";
-import { generateHash } from "../utils/hash";
 import { User } from "~/server/models/User.model";
 
 export interface Medium extends Document {
